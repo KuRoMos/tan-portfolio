@@ -10,6 +10,15 @@ import {
   saveImage
 } from './_lib/store.js';
 
+// Vercel's Node.js runtime auto-parses request bodies by default, which
+// consumes the raw stream before formidable can read the multipart file
+// data. Disabling it here is required for file uploads to work.
+export const config = {
+  api: {
+    bodyParser: false
+  }
+};
+
 async function parseForm(req) {
   const form = formidable({ multiples: true, maxFileSize: 10 * 1024 * 1024 });
   const [fields, files] = await form.parse(req);
