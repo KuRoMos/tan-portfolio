@@ -1,0 +1,11 @@
+{
+  "name": "tan-portfolio",
+  "private": true,
+  "type": "module",
+  "description": "Tan Akrthum portfolio site with a Vercel-native self-service gallery (Certificates & Achievements / Training & Workshops).",
+  "dependencies": {
+    "@vercel/blob": "^0.27.0",
+    "formidable": "^3.5.1",
+    "sharp": "^0.33.0"
+  }
+}

@@ -1,0 +1,688 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.page{font-family:'Inter',sans-serif;background:#f0eeff;min-height:100vh}
+.navbar{background:#fff;border-bottom:1px solid #e8e6ff;padding:0 1.25rem;height:52px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:8px}
+.nav-logo-mark{width:28px;height:28px;background:#5B4CF5;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:13px}
+.nav-logo-name{font-size:14px;font-weight:700;color:#1a1523;letter-spacing:-.02em}
+.nav-right{display:flex;align-items:center;gap:6px}
+.nav-pill{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;border:1.5px solid #e8e6ff;color:#6E6B7B;background:#fff}
+.nav-pill.active{background:#5B4CF5;color:#fff;border-color:#5B4CF5}
+.nav-pill.btn{cursor:pointer}
+.save-dot{width:7px;height:7px;border-radius:50%;background:#10B981;display:inline-block;margin-right:4px;vertical-align:middle}
+.main{padding:1.1rem 1.1rem 2rem}
+.hero-card{border-radius:22px;overflow:hidden;margin-bottom:1rem}
+.hero-bg{background:#1a0a4e;padding:1.4rem;position:relative;display:flex;flex-direction:column;justify-content:space-between}
+.geo{position:absolute;border-radius:50%}
+.g1{width:260px;height:260px;top:-80px;right:-60px;background:#4338CA;opacity:.5}
+.g2{width:160px;height:160px;bottom:-50px;left:20%;background:#7C3AED;opacity:.4}
+.g3{width:90px;height:90px;top:10px;left:45%;background:#EC4899;opacity:.2}
+.g4{width:50px;height:50px;bottom:20px;right:180px;background:#06B6D4;opacity:.25;border-radius:12px;transform:rotate(20deg)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:32px 32px}
+.hero-shimmer{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#818CF8 40%,#C084FC 60%,transparent)}
+.hero-inner{position:relative;z-index:2}
+.hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:.9rem}
+.hero-left{flex:1;min-width:0}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:.15em;color:#A5B4FC;text-transform:uppercase;margin-bottom:5px;display:flex;align-items:center;gap:5px}
+.eyebrow-dot{width:5px;height:5px;border-radius:50%;background:#818CF8;flex-shrink:0}
+.hero-title{font-size:20px;font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1.15;margin-bottom:3px}
+.hero-title span{color:#A5B4FC}
+.hero-sub{font-size:11px;color:#818CF8;letter-spacing:.02em;margin-bottom:10px}
+.hero-badges{display:flex;gap:6px;flex-wrap:wrap}
+.hbadge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:8px}
+.hero-right{display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0}
+.photo-frame{width:76px;height:76px;border-radius:50%;padding:3px;background:linear-gradient(135deg,#818CF8,#C084FC,#EC4899);flex-shrink:0}
+.photo-inner{width:100%;height:100%;border-radius:50%;overflow:hidden;border:2px solid #1a0a4e}
+.photo-inner img{width:100%;height:100%;object-fit:cover;object-position:center 15%}
+.ring-wrap{position:relative;width:52px;height:52px}
+.ring-wrap svg{width:52px;height:52px;transform:rotate(-90deg)}
+.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-center span{font-size:12px;font-weight:800;color:#fff;line-height:1}
+.ring-center small{font-size:8px;color:#818CF8;margin-top:1px}
+.stat-bar{display:flex;gap:0;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.sb{flex:1;padding:7px 10px;text-align:center;background:rgba(255,255,255,.07);border-right:1px solid rgba(255,255,255,.08)}
+.sb:last-child{border-right:none}
+.sb-n{font-size:17px;font-weight:800;color:#fff}
+.sb-l{font-size:10px;color:#818CF8;margin-top:1px;font-weight:500}
+.hero-prog{height:3px;background:rgba(255,255,255,.1);margin-top:.75rem;border-radius:3px;overflow:hidden}
+.hero-prog-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#818CF8,#C084FC);transition:width .6s cubic-bezier(.4,0,.2,1)}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem}
+.section-head h2{font-size:11px;font-weight:700;color:#6E6B7B;letter-spacing:.08em;text-transform:uppercase}
+.mgrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;margin-bottom:1rem}
+.mc{border-radius:12px;background:#fff;border:1.5px solid #e8e6ff;cursor:pointer;padding:8px 7px 7px;transition:all .18s}
+.mc:hover{border-color:#c4b8ff;background:#faf9ff}
+.mc.sel{border-color:#5B4CF5;background:#ede9fe}
+.mc-bar{height:3px;border-radius:3px;margin-bottom:5px}
+.mc-name{font-size:11px;font-weight:700;color:#1a1523}
+.mc-count{font-size:10px;color:#9CA3AF;margin-top:1px}
+.mc-pct{font-size:10px;font-weight:600;margin-top:4px}
+.panel{background:#fff;border-radius:18px;border:1.5px solid #e8e6ff;overflow:hidden}
+.panel-head{padding:12px 16px;border-bottom:1px solid #f0eeff;display:flex;align-items:center;gap:10px}
+.ph-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
+.ph-text{flex:1}
+.ph-text h3{font-size:14px;font-weight:700;color:#1a1523}
+.ph-text p{font-size:11px;color:#9CA3AF;margin-top:1px}
+.ph-badge{font-size:12px;font-weight:700;padding:4px 10px;border-radius:8px}
+.prog-track{height:3px;background:#f5f4ff}
+.prog-fill{height:100%;border-radius:4px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.tabs{display:flex;border-bottom:1px solid #f0eeff}
+.tab{flex:1;padding:9px 0;font-size:12px;font-weight:600;color:#9CA3AF;text-align:center;cursor:pointer;border-bottom:2px solid transparent;transition:all .18s;background:none;border-top:none;border-left:none;border-right:none;font-family:'Inter',sans-serif}
+.tab.on{color:#5B4CF5;border-bottom-color:#5B4CF5}
+.panel-body{padding:12px 14px}
+.stat3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:10px}
+.sc{border-radius:10px;padding:7px 8px;text-align:center}
+.sc-n{font-size:16px;font-weight:700}
+.sc-l{font-size:10px;font-weight:600;margin-top:2px;text-transform:uppercase;letter-spacing:.04em}
+.add-bar{display:flex;gap:6px;margin-bottom:8px}
+.add-bar input{flex:1;font-size:13px;border:1.5px solid #e8e6ff;border-radius:9px;padding:8px 11px;outline:none;color:#1a1523;background:#fff;font-family:'Inter',sans-serif}
+.add-bar input::placeholder{color:#C4C0D8}
+.add-bar input:focus{border-color:#5B4CF5}
+.add-bar button{padding:0 13px;border-radius:9px;border:none;background:#5B4CF5;color:#fff;font-size:18px;cursor:pointer;flex-shrink:0}
+.add-bar button:hover{background:#4338CA}
+.cpills{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.cpill{padding:5px 12px 5px 8px;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #e8e6ff;color:#6E6B7B;background:#fff;display:flex;align-items:center;gap:7px;transition:all .18s;font-family:'Inter',sans-serif}
+.cpill:hover{border-color:#c4b8ff;background:#faf9ff}
+.cpill.on{border-width:1.5px}
+.cpill-icon{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.cpill-label{font-size:11px;font-weight:700}
+.ilist{display:flex;flex-direction:column;gap:5px}
+.it{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:10px;border:1.5px solid #f0eeff;background:#fff;transition:all .18s}
+.it:hover{border-color:#d4caff;background:#fdfcff}
+.it.done{background:#fafafa;border-color:#f0f0f0}
+.it.done .it-tx{text-decoration:line-through;color:#C4C0D8}
+.chk{width:19px;height:19px;border-radius:50%;border:2px solid #d4caff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;background:#fff;font-size:11px;font-weight:700}
+.chk.on{background:#5B4CF5;border-color:#5B4CF5;color:#fff}
+.it-emoji{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.it-tx{flex:1;font-size:13px;color:#1a1523;font-weight:500;min-width:0}
+.it-date{font-size:10px;color:#9CA3AF;white-space:nowrap;flex-shrink:0;background:#f5f4ff;padding:2px 7px;border-radius:5px}
+.it-actions{display:flex;gap:5px;flex-shrink:0}
+.act-btn{width:30px;height:30px;border-radius:8px;border:1.5px solid;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .15s;background:transparent;padding:0}
+.act-btn.edit{border-color:#DDD6FE;background:#F5F3FF}
+.act-btn.edit:hover{background:#EDE9FE;border-color:#5B4CF5}
+.act-btn.del{border-color:#FECACA;background:#FEF2F2}
+.act-btn.del:hover{background:#FEE2E2;border-color:#EF4444}
+.empty{text-align:center;padding:1.5rem 1rem}
+.empty p{font-size:12px;color:#9CA3AF;font-weight:500;margin-top:8px}
+.cal-header{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;margin-bottom:4px}
+.cal-dow{font-size:10px;font-weight:700;text-align:center;color:#9CA3AF;padding:3px 0}
+.cal-dow.we{color:#EC4899}
+.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;margin-bottom:8px}
+.cal-day{border-radius:8px;padding:4px 3px;text-align:center;cursor:pointer;transition:all .15s;border:1.5px solid transparent;min-height:36px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.cal-day:hover{background:#f5f4ff}
+.cal-day.empty{cursor:default}
+.cal-day.today{border-color:#5B4CF5;background:#EDE9FE}
+.cal-day.selected{border-color:#5B4CF5;background:#EDE9FE}
+.day-num{font-size:11px;font-weight:600;color:#1a1523;line-height:1}
+.cal-day.today .day-num{color:#5B4CF5}
+.day-dots{display:flex;gap:2px;justify-content:center;flex-wrap:wrap;max-width:28px}
+.day-dot{width:4px;height:4px;border-radius:50%}
+.day-tasks{background:#f8f7ff;border-radius:10px;padding:10px 12px;margin-bottom:8px;border:1px solid #e8e6ff}
+.day-tasks-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
+.day-tasks-title{font-size:12px;font-weight:700;color:#1a1523}
+.day-tasks-badge{font-size:10px;font-weight:700;background:#EDE9FE;color:#4338CA;padding:2px 8px;border-radius:6px}
+.modal-overlay{position:absolute;inset:0;background:rgba(26,21,35,.55);display:flex;align-items:center;justify-content:center;z-index:100;border-radius:18px}
+.modal{background:#fff;border-radius:16px;padding:20px;width:calc(100% - 48px);max-width:340px;border:1.5px solid #e8e6ff}
+.modal h4{font-size:15px;font-weight:700;color:#1a1523;margin-bottom:14px}
+.modal label{font-size:11px;font-weight:700;color:#6E6B7B;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:5px}
+.modal input{width:100%;font-size:13px;border:1.5px solid #e8e6ff;border-radius:9px;padding:8px 11px;outline:none;color:#1a1523;font-family:'Inter',sans-serif;margin-bottom:12px;background:#fff}
+.modal input:focus{border-color:#5B4CF5}
+.modal-cat-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-bottom:14px}
+.modal-cat-item{border-radius:10px;border:1.5px solid #e8e6ff;background:#fff;cursor:pointer;padding:8px 4px 6px;text-align:center;transition:all .18s;display:flex;flex-direction:column;align-items:center;gap:4px}
+.modal-cat-item:hover{border-color:#c4b8ff}
+.modal-cat-item.on{border-width:2px}
+.mci-emoji{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:18px}
+.mci-label{font-size:10px;font-weight:700}
+.modal-btns{display:flex;gap:8px}
+.modal-btns button{flex:1;padding:9px 0;border-radius:9px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.btn-cancel{background:#f5f4ff;color:#6E6B7B}
+.btn-save{background:#5B4CF5;color:#fff}
+.btn-save:hover{background:#4338CA}
+.btn-del-confirm{background:#FEE2E2;color:#DC2626}
+.toast{position:absolute;bottom:14px;right:14px;background:#1a1523;color:#fff;font-size:11px;font-weight:600;padding:7px 12px;border-radius:9px;display:flex;align-items:center;gap:5px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:200}
+.toast.show{opacity:1}
+/* Reminder Bell */
+.remind-bell{position:relative;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;transition:background .15s}
+.remind-bell:hover{background:#f0eeff}
+.remind-bell svg{width:20px;height:20px}
+.remind-badge{position:absolute;top:2px;right:2px;min-width:15px;height:15px;background:#EF4444;color:#fff;font-size:9px;font-weight:800;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 3px;border:1.5px solid #fff;display:none}
+.remind-badge.show{display:flex}
+/* Reminder Panel */
+.remind-panel{position:absolute;top:54px;right:12px;width:300px;background:#fff;border-radius:16px;border:1.5px solid #e8e6ff;box-shadow:0 8px 32px rgba(91,76,245,.12);z-index:300;display:none}
+.remind-panel.show{display:block}
+.rp-head{padding:12px 14px 10px;border-bottom:1px solid #f0eeff;display:flex;align-items:center;justify-content:space-between}
+.rp-title{font-size:13px;font-weight:700;color:#1a1523;display:flex;align-items:center;gap:6px}
+.rp-close{width:24px;height:24px;border-radius:6px;border:none;background:#f5f4ff;color:#6E6B7B;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.rp-body{max-height:320px;overflow-y:auto;padding:10px 12px}
+.rp-empty{text-align:center;padding:20px 0;font-size:12px;color:#9CA3AF}
+.rp-item{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border-radius:10px;border:1.5px solid;margin-bottom:6px;cursor:pointer;transition:all .15s}
+.rp-item.overdue{border-color:#FECACA;background:#FEF2F2}
+.rp-item.overdue:hover{background:#FEE2E2}
+.rp-item.today{border-color:#FDE68A;background:#FFFBEB}
+.rp-item.today:hover{background:#FEF3C7}
+.rp-item.soon{border-color:#DDD6FE;background:#F5F3FF}
+.rp-item.soon:hover{background:#EDE9FE}
+.rp-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.rp-item.overdue .rp-dot{background:#EF4444}
+.rp-item.today .rp-dot{background:#F59E0B}
+.rp-item.soon .rp-dot{background:#8B5CF6}
+.rp-info{flex:1;min-width:0}
+.rp-text{font-size:12px;font-weight:600;color:#1a1523;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rp-meta{font-size:10px;color:#9CA3AF;margin-top:2px}
+.rp-tag{font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;flex-shrink:0}
+.rp-item.overdue .rp-tag{background:#FEE2E2;color:#DC2626}
+.rp-item.today .rp-tag{background:#FEF3C7;color:#D97706}
+.rp-item.soon .rp-tag{background:#EDE9FE;color:#5B4CF5}
+/* Browser notification toggle */
+.notif-settings{border-top:1px solid #f0eeff;padding:10px 12px}
+.ns-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.ns-toggle{position:relative;width:36px;height:20px;flex-shrink:0}
+.ns-toggle input{opacity:0;width:0;height:0;position:absolute}
+.ns-slider{position:absolute;inset:0;background:#e8e6ff;border-radius:20px;cursor:pointer;transition:.2s}
+.ns-slider:before{content:'';position:absolute;width:14px;height:14px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}
+.ns-toggle input:checked+.ns-slider{background:#5B4CF5}
+.ns-toggle input:checked+.ns-slider:before{transform:translateX(16px)}
+.ns-label{font-size:11px;font-weight:600;color:#6E6B7B;flex:1}
+.ns-modes{display:flex;gap:5px}
+.ns-mode-btn{flex:1;padding:6px 0;border-radius:8px;border:1.5px solid #e8e6ff;background:#fff;font-size:10px;font-weight:700;color:#9CA3AF;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;text-align:center}
+.ns-mode-btn.on{border-color:#5B4CF5;background:#EDE9FE;color:#5B4CF5}
+.ns-time-hint{font-size:10px;color:#A5B4FC;text-align:center;margin-top:2px}
+</style>
+
+<div class="page" style="position:relative">
+  <nav class="navbar">
+    <div class="nav-logo">
+      <div class="nav-logo-mark">VS</div>
+      <span class="nav-logo-name">บริษัท Viserve </span>
+    </div>
+    <div class="nav-right">
+      <div class="nav-pill">2026</div>
+      <div class="nav-pill active"><span class="save-dot"></span>บันทึกแล้ว</div>
+      <div class="remind-bell" onclick="toggleRemindPanel()" title="แจ้งเตือน">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#6E6B7B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+        <div class="remind-badge" id="remind-badge"></div>
+      </div>
+      <div class="nav-pill btn" onclick="clearAll()">🗑 ล้าง</div>
+    </div>
+  </nav>
+
+  <div class="main">
+    <div class="hero-card">
+      <div class="hero-bg">
+        <div class="hero-grid"></div>
+        <div class="geo g1"></div><div class="geo g2"></div><div class="geo g3"></div><div class="geo g4"></div>
+        <div class="hero-shimmer"></div>
+        <div class="hero-inner">
+          <div class="hero-top">
+            <div class="hero-left">
+              <div class="eyebrow"><span class="eyebrow-dot"></span>ภาพรวมทั้งปี 2026</div>
+              <div class="hero-title">Team IT<br><span>Checklist</span> ✨</div>
+              <div class="hero-sub">วางแผน · ติดตาม · ทำให้สำเร็จ</div>
+              <div class="hero-badges">
+                <span class="hbadge" style="background:rgba(129,140,248,.2);border:1px solid rgba(129,140,248,.35);color:#A5B4FC">🎓 IT </span>
+                <span class="hbadge" style="background:rgba(192,132,252,.2);border:1px solid rgba(192,132,252,.35);color:#C084FC">⭐ IT support</span>
+              </div>
+            </div>
+            <div class="hero-right">
+              <div class="photo-frame">
+                <div class="photo-inner">
+                  <img id="profile-img" alt="profile">
+                </div>
+              </div>
+              <div class="ring-wrap">
+                <svg viewBox="0 0 52 52">
+                  <circle cx="26" cy="26" r="21" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="6"/>
+                  <circle id="big-arc" cx="26" cy="26" r="21" fill="none" stroke="url(#rg2)" stroke-width="6" stroke-linecap="round" stroke-dasharray="131.9" stroke-dashoffset="131.9" transform="rotate(-90 26 26)"/>
+                  <defs><linearGradient id="rg2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#818CF8"/><stop offset="100%" stop-color="#C084FC"/></linearGradient></defs>
+                </svg>
+                <div class="ring-center"><span id="big-pct">0%</span><small>ทั้งปี</small></div>
+              </div>
+            </div>
+          </div>
+          <div class="stat-bar">
+            <div class="sb"><div class="sb-n" id="h-total">0</div><div class="sb-l">ทั้งหมด</div></div>
+            <div class="sb"><div class="sb-n" id="h-done" style="color:#6EE7B7">0</div><div class="sb-l">เสร็จแล้ว</div></div>
+            <div class="sb"><div class="sb-n" id="h-left" style="color:#FCA5A5">0</div><div class="sb-l">ค้างอยู่</div></div>
+          </div>
+          <div class="hero-prog"><div class="hero-prog-fill" id="hero-prog-fill" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head"><h2>เลือกเดือน</h2><span style="font-size:11px;color:#9CA3AF" id="cur-mon-label"></span></div>
+    <div class="mgrid" id="mgrid"></div>
+
+    <div class="panel" id="main-panel">
+      <div class="panel-head">
+        <div class="ph-icon" id="ph-icon"></div>
+        <div class="ph-text"><h3 id="ph-name">มกราคม</h3><p id="ph-sub">0 รายการ</p></div>
+        <div class="ph-badge" id="ph-badge">0%</div>
+      </div>
+      <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+      <div class="tabs">
+        <button class="tab on" onclick="switchTab('checklist',this)">☑ รายการ</button>
+        <button class="tab" onclick="switchTab('calendar',this)">📅 ปฏิทิน</button>
+      </div>
+      <div class="panel-body">
+        <div id="view-checklist">
+          <div class="stat3" id="stat3"></div>
+          <div class="add-bar"><input type="text" id="inp" placeholder="พิมพ์รายการที่ต้องทำ..."><button onclick="addItem()">＋</button></div>
+          <div class="cpills" id="cpills"></div>
+          <div class="ilist" id="ilist"></div>
+        </div>
+        <div id="view-calendar" style="display:none">
+          <div class="cal-header" id="cal-header"></div>
+          <div class="cal-grid" id="cal-grid"></div>
+          <div id="day-panel"></div>
+          <div class="add-bar"><input type="text" id="cal-inp" placeholder="เพิ่มรายการวันที่เลือก..."><button onclick="addCalItem()">＋</button></div>
+          <div class="cpills" id="cal-cpills"></div>
+        </div>
+      </div>
+      <div class="modal-overlay" id="modal" style="display:none">
+        <div class="modal">
+          <h4>✏️ <span id="modal-title">แก้ไขรายการ</span></h4>
+          <label>ชื่อรายการ</label><input type="text" id="modal-text" placeholder="ชื่อรายการ...">
+          <label>วันที่ (ถ้ามี)</label><input type="number" id="modal-day" placeholder="เช่น 15" min="1" max="31">
+          <label>หมวดหมู่</label>
+          <div class="modal-cat-grid" id="modal-cats"></div>
+          <div class="modal-btns">
+            <button class="btn-cancel" onclick="closeModal()">ยกเลิก</button>
+            <button class="btn-del-confirm" onclick="confirmDelete()">🗑 ลบ</button>
+            <button class="btn-save" onclick="saveEdit()">✓ บันทึก</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Reminder Panel -->
+  <div class="remind-panel" id="remind-panel">
+    <div class="rp-head">
+      <div class="rp-title">🔔 แจ้งเตือนรายการ</div>
+      <button class="rp-close" onclick="toggleRemindPanel()">✕</button>
+    </div>
+    <div class="rp-body" id="rp-body"></div>
+    <div class="notif-settings" id="notif-settings"></div>
+  </div>
+
+  <div class="toast" id="toast">💾 <span id="toast-msg">บันทึกแล้ว</span></div>
+</div>
+
+<script>
+const PHOTO_B64 = "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";
+
+document.getElementById('profile-img').src = 'data:image/jpeg;base64,' + PHOTO_B64;
+
+const MONTHS=[
+  {s:'ม.ค.',f:'มกราคม',e:'❄️',h:'#6366F1',light:'#EEF2FF',tc:'#4338CA'},
+  {s:'ก.พ.',f:'กุมภาพันธ์',e:'💗',h:'#EC4899',light:'#FDF2F8',tc:'#BE185D'},
+  {s:'มี.ค.',f:'มีนาคม',e:'🌿',h:'#10B981',light:'#ECFDF5',tc:'#065F46'},
+  {s:'เม.ย.',f:'เมษายน',e:'💧',h:'#3B82F6',light:'#EFF6FF',tc:'#1D4ED8'},
+  {s:'พ.ค.',f:'พฤษภาคม',e:'☀️',h:'#F59E0B',light:'#FFFBEB',tc:'#92400E'},
+  {s:'มิ.ย.',f:'มิถุนายน',e:'🌧️',h:'#14B8A6',light:'#F0FDFA',tc:'#115E59'},
+  {s:'ก.ค.',f:'กรกฎาคม',e:'☂️',h:'#8B5CF6',light:'#F5F3FF',tc:'#5B21B6'},
+  {s:'ส.ค.',f:'สิงหาคม',e:'⭐',h:'#F97316',light:'#FFF7ED',tc:'#9A3412'},
+  {s:'ก.ย.',f:'กันยายน',e:'🌬️',h:'#0EA5E9',light:'#F0F9FF',tc:'#0C4A6E'},
+  {s:'ต.ค.',f:'ตุลาคม',e:'🌙',h:'#A855F7',light:'#FAF5FF',tc:'#6B21A8'},
+  {s:'พ.ย.',f:'พฤศจิกายน',e:'☁️',h:'#64748B',light:'#F8FAFC',tc:'#1E293B'},
+  {s:'ธ.ค.',f:'ธันวาคม',e:'🎁',h:'#EF4444',light:'#FEF2F2',tc:'#991B1B'},
+]
+const CATS=[
+  {id:'work',l:'งาน',e:'💼',dot:'#5B4CF5',light:'#EDE9FE',tc:'#4338CA'},
+  {id:'health',l:'สุขภาพ',e:'🏃',dot:'#10B981',light:'#D1FAE5',tc:'#065F46'},
+  {id:'finance',l:'การเงิน',e:'💰',dot:'#F59E0B',light:'#FEF3C7',tc:'#92400E'},
+  {id:'personal',l:'ส่วนตัว',e:'⭐',dot:'#EC4899',light:'#FCE7F3',tc:'#9D174D'},
+  {id:'other',l:'อื่นๆ',e:'📌',dot:'#64748B',light:'#F1F5F9',tc:'#334155'},
+]
+const DOWS=['อา','จ','อ','พ','พฤ','ศ','ส']
+const KEY='planify-2026'
+let data=MONTHS.map(()=>[])
+let cur=new Date().getMonth()
+let selCat='work',calSelCat='work',selDay=null,activeTab='checklist',editIdx=null,editModalCat='work'
+const TODAY=new Date()
+function daysInMonth(m){return new Date(2026,m+1,0).getDate()}
+function firstDOW(m){return new Date(2026,m,1).getDay()}
+function loadData(){try{const s=localStorage.getItem(KEY);if(s){const p=JSON.parse(s);if(Array.isArray(p)&&p.length===12)data=p}}catch(e){}}
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbwTclBkCNQxeFaPhzQAbRoXCLmcpq1uqdDI9pdvLQ_fzZBaxHApd4RYqNCvCzEnjSl2pA/exec'
+
+function saveData(){
+  try{
+    localStorage.setItem(KEY,JSON.stringify(data))
+    showToast('บันทึกแล้ว')
+  }catch(e){}
+  // ส่งข้อมูลไป Google Sheets
+  try{
+    fetch(GAS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    })
+  }catch(e){}
+}
+let toastT=null
+function showToast(msg){const t=document.getElementById('toast');document.getElementById('toast-msg').textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2000)}
+function clearAll(){if(!confirm('ล้างข้อมูลทั้งหมด?'))return;data=MONTHS.map(()=>[]);localStorage.removeItem(KEY);selDay=null;render()}
+function pct(mi){const d=data[mi];if(!d.length)return 0;return Math.round(d.filter(x=>x.done).length/d.length*100)}
+function catPillsHTML(ac,fn){return CATS.map(c=>`<div class="cpill${ac===c.id?' on':''}" style="${ac===c.id?`background:${c.light};border-color:${c.dot};color:${c.tc}`:''}" onclick="${fn}('${c.id}')"><div class="cpill-icon" style="background:${c.light}">${c.e}</div><span class="cpill-label">${c.l}</span></div>`).join('')}
+function renderHero(){
+  const all=data.flat(),done=all.filter(x=>x.done).length,total=all.length,p=total?Math.round(done/total*100):0
+  document.getElementById('h-total').textContent=total
+  document.getElementById('h-done').textContent=done
+  document.getElementById('h-left').textContent=total-done
+  const arc=document.getElementById('big-arc'),c=131.9
+  arc.style.strokeDashoffset=c-(c*p/100)
+  document.getElementById('big-pct').textContent=p+'%'
+  document.getElementById('hero-prog-fill').style.width=p+'%'
+}
+function renderGrid(){
+  document.getElementById('cur-mon-label').textContent=MONTHS[cur].f
+  document.getElementById('mgrid').innerHTML=MONTHS.map((m,i)=>{const d=data[i],p=pct(i),done=d.filter(x=>x.done).length;return`<div class="mc${i===cur?' sel':''}" onclick="selectMonth(${i})"><div class="mc-bar" style="background:${i===cur?m.h:'#e8e6ff'}"></div><div class="mc-name">${m.s}</div><div class="mc-count">${done}/${d.length}</div><div class="mc-pct" style="color:${m.h}">${p}%</div></div>`}).join('')
+}
+function renderPanelHead(){
+  const m=MONTHS[cur],d=data[cur],done=d.filter(x=>x.done).length,p=pct(cur)
+  const icon=document.getElementById('ph-icon');icon.style.background=m.light;icon.textContent=m.e
+  document.getElementById('ph-name').textContent=m.f
+  document.getElementById('ph-sub').textContent=`${d.length} รายการ · เสร็จ ${done}`
+  const badge=document.getElementById('ph-badge');badge.textContent=p+'%';badge.style.background=m.light;badge.style.color=m.tc
+  document.getElementById('prog-fill').style.width=p+'%';document.getElementById('prog-fill').style.background=m.h
+}
+function itemHTML(x,j,showDay=true){
+  const cat=CATS.find(c=>c.id===x.cat)||CATS[4]
+  return `<div class="it${x.done?' done':''}"><div class="chk${x.done?' on':''}" onclick="toggle(${j})">${x.done?'✓':''}</div><div class="it-emoji" style="background:${cat.light}">${cat.e}</div><span class="it-tx">${x.text}</span>${showDay&&x.day?`<span class="it-date">📅 ${x.day}</span>`:''}<div class="it-actions"><button class="act-btn edit" onclick="openEdit(${j})">✏️</button><button class="act-btn del" onclick="openEdit(${j},true)">🗑</button></div></div>`
+}
+function renderChecklist(){
+  const d=data[cur],done=d.filter(x=>x.done).length,rem=d.length-done
+  document.getElementById('stat3').innerHTML=`<div class="sc" style="background:#f5f4ff"><div class="sc-n">${d.length}</div><div class="sc-l" style="color:#6E6B7B">ทั้งหมด</div></div><div class="sc" style="background:#ECFDF5"><div class="sc-n" style="color:#059669">${done}</div><div class="sc-l" style="color:#059669">เสร็จ</div></div><div class="sc" style="background:#FEF2F2"><div class="sc-n" style="color:#DC2626">${rem}</div><div class="sc-l" style="color:#DC2626">ค้างอยู่</div></div>`
+  document.getElementById('cpills').innerHTML=catPillsHTML(selCat,'setSelCat')
+  const list=document.getElementById('ilist')
+  if(!d.length){list.innerHTML=`<div class="empty"><div style="font-size:32px">${MONTHS[cur].e}</div><p>ยังไม่มีรายการ</p></div>`;return}
+  list.innerHTML=d.map((x,j)=>itemHTML(x,j,true)).join('')
+}
+function renderCalendar(){
+  const days=daysInMonth(cur),first=firstDOW(cur)
+  document.getElementById('cal-header').innerHTML=DOWS.map((d,i)=>`<div class="cal-dow${i===0||i===6?' we':''}">${d}</div>`).join('')
+  const cells=[]
+  for(let i=0;i<first;i++)cells.push('<div class="cal-day empty"></div>')
+  for(let d=1;d<=days;d++){
+    const isToday=TODAY.getFullYear()===2026&&TODAY.getMonth()===cur&&TODAY.getDate()===d
+    const dayItems=data[cur].filter(x=>x.day===d)
+    const dots=dayItems.slice(0,4).map(x=>{const c=CATS.find(cc=>cc.id===x.cat)||CATS[4];return`<div class="day-dot" style="background:${x.done?'#10B981':c.dot}"></div>`}).join('')
+    cells.push(`<div class="cal-day${isToday?' today':''}${selDay===d?' selected':''}" onclick="selectDay(${d})"><div class="day-num">${d}</div>${dots?`<div class="day-dots">${dots}</div>`:''}</div>`)
+  }
+  document.getElementById('cal-grid').innerHTML=cells.join('')
+  document.getElementById('cal-cpills').innerHTML=catPillsHTML(calSelCat,'setCalCat')
+  renderDayPanel()
+}
+function renderDayPanel(){
+  const panel=document.getElementById('day-panel')
+  if(!selDay){panel.innerHTML='';return}
+  const m=MONTHS[cur],dayItems=data[cur].map((x,j)=>({x,j})).filter(({x})=>x.day===selDay)
+  panel.innerHTML=`<div class="day-tasks"><div class="day-tasks-head"><span class="day-tasks-title">📅 วันที่ ${selDay} ${m.f}</span><span class="day-tasks-badge">${dayItems.length} รายการ</span></div>${dayItems.length?dayItems.map(({x,j})=>itemHTML(x,j,false)).join(''):'<div style="font-size:12px;color:#9CA3AF;text-align:center;padding:8px 0">ไม่มีรายการ</div>'}</div>`
+  document.getElementById('cal-inp').placeholder=`เพิ่มรายการวันที่ ${selDay} ${m.f}...`
+}
+function openEdit(j,focusDel=false){
+  editIdx=j;const x=data[cur][j];editModalCat=x.cat||'work'
+  document.getElementById('modal-text').value=x.text
+  document.getElementById('modal-day').value=x.day||''
+  document.getElementById('modal-title').textContent=focusDel?'ลบรายการ':'แก้ไขรายการ'
+  renderModalCats();document.getElementById('modal').style.display='flex'
+  if(!focusDel)setTimeout(()=>document.getElementById('modal-text').focus(),50)
+}
+function renderModalCats(){document.getElementById('modal-cats').innerHTML=CATS.map(c=>`<div class="modal-cat-item${editModalCat===c.id?' on':''}" style="${editModalCat===c.id?`border-color:${c.dot};background:${c.light}`:''}" onclick="editModalCat='${c.id}';renderModalCats()"><div class="mci-emoji" style="background:${c.light}">${c.e}</div><span class="mci-label" style="color:${editModalCat===c.id?c.tc:'#6E6B7B'}">${c.l}</span></div>`).join('')}
+function closeModal(){document.getElementById('modal').style.display='none';editIdx=null}
+function saveEdit(){
+  if(editIdx===null)return
+  const txt=document.getElementById('modal-text').value.trim()
+  if(!txt){document.getElementById('modal-text').focus();return}
+  const dayVal=parseInt(document.getElementById('modal-day').value)||null
+  data[cur][editIdx]={...data[cur][editIdx],text:txt,cat:editModalCat,day:dayVal}
+  closeModal();render();showToast('แก้ไขแล้ว')
+}
+function confirmDelete(){
+  if(editIdx===null)return
+  data[cur].splice(editIdx,1)
+  if(selDay&&!data[cur].some(x=>x.day===selDay))selDay=null
+  closeModal();render();showToast('ลบแล้ว')
+}
+function setSelCat(id){selCat=id;renderChecklist()}
+function setCalCat(id){calSelCat=id;renderCalendar()}
+function switchTab(tab,el){activeTab=tab;document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));el.classList.add('on');document.getElementById('view-checklist').style.display=tab==='checklist'?'block':'none';document.getElementById('view-calendar').style.display=tab==='calendar'?'block':'none';if(tab==='calendar')renderCalendar()}
+function render(){saveData();renderHero();renderGrid();renderPanelHead();if(activeTab==='checklist')renderChecklist();else renderCalendar();renderRemindPanel()}
+function selectMonth(i){cur=i;selDay=null;renderGrid();renderPanelHead();if(activeTab==='checklist')renderChecklist();else renderCalendar()}
+function selectDay(d){selDay=selDay===d?null:d;renderCalendar()}
+function toggle(j){data[cur][j].done=!data[cur][j].done;render()}
+function addItem(){const inp=document.getElementById('inp'),t=inp.value.trim();if(!t)return;data[cur].push({text:t,cat:selCat,done:false,day:null});inp.value='';render()}
+function addCalItem(){const inp=document.getElementById('cal-inp'),t=inp.value.trim();if(!t)return;data[cur].push({text:t,cat:calSelCat,done:false,day:selDay});inp.value='';render()}
+document.getElementById('inp').addEventListener('keydown',e=>{if(e.key==='Enter')addItem()})
+document.getElementById('cal-inp').addEventListener('keydown',e=>{if(e.key==='Enter')addCalItem()})
+document.getElementById('modal-text').addEventListener('keydown',e=>{if(e.key==='Enter')saveEdit()})
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal()})
+// ===== REMINDER SYSTEM =====
+let remindPanelOpen = false
+
+function getReminders() {
+  const todayM = TODAY.getMonth()
+  const todayD = TODAY.getDate()
+  const results = []
+  MONTHS.forEach((m, mi) => {
+    data[mi].forEach((x, j) => {
+      if (x.done || !x.day) return
+      const diff = (mi - todayM) * 31 + (x.day - todayD) // rough diff in days
+      let type = null
+      if (mi < todayM || (mi === todayM && x.day < todayD)) type = 'overdue'
+      else if (mi === todayM && x.day === todayD) type = 'today'
+      else if (mi === todayM && x.day - todayD <= 3) type = 'soon'
+      if (type) results.push({ x, mi, j, type, m })
+    })
+  })
+  // sort: overdue first, then today, then soon
+  const order = { overdue: 0, today: 1, soon: 2 }
+  results.sort((a, b) => order[a.type] - order[b.type] || a.mi - b.mi || a.x.day - b.x.day)
+  return results
+}
+
+function renderRemindPanel() {
+  const items = getReminders()
+  const badge = document.getElementById('remind-badge')
+  const body = document.getElementById('rp-body')
+  if (items.length) {
+    badge.textContent = items.length > 9 ? '9+' : items.length
+    badge.classList.add('show')
+  } else {
+    badge.classList.remove('show')
+  }
+  if (!items.length) {
+    body.innerHTML = '<div class="rp-empty">🎉<br>ไม่มีรายการค้างอยู่</div>'
+    return
+  }
+  const tagLabel = { overdue: 'เลยกำหนด', today: 'วันนี้', soon: 'เร็วๆ นี้' }
+  body.innerHTML = items.map(({ x, mi, j, type, m }) => {
+    const cat = CATS.find(c => c.id === x.cat) || CATS[4]
+    const dateStr = `${x.day} ${m.f}`
+    return `<div class="rp-item ${type}" onclick="jumpToItem(${mi},${j})">
+      <div class="rp-dot"></div>
+      <div class="rp-info">
+        <div class="rp-text">${cat.e} ${x.text}</div>
+        <div class="rp-meta">📅 ${dateStr}</div>
+      </div>
+      <div class="rp-tag">${tagLabel[type]}</div>
+    </div>`
+  }).join('')
+}
+
+function toggleRemindPanel() {
+  remindPanelOpen = !remindPanelOpen
+  document.getElementById('remind-panel').classList.toggle('show', remindPanelOpen)
+  if (remindPanelOpen) renderRemindPanel()
+}
+
+function jumpToItem(mi, j) {
+  toggleRemindPanel()
+  selectMonth(mi)
+  activeTab = 'checklist'
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'))
+  document.querySelectorAll('.tab')[0].classList.add('on')
+  document.getElementById('view-checklist').style.display = 'block'
+  document.getElementById('view-calendar').style.display = 'none'
+  renderChecklist()
+  setTimeout(() => {
+    const items = document.querySelectorAll('.it')
+    if (items[j]) items[j].scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }, 100)
+}
+
+// ===== SMART SCHEDULE SYSTEM =====
+// Mode A: after work = 17:00–17:30  |  Mode B: random within today before 17:30
+let notifMode = localStorage.getItem('notif-mode') || 'random' // 'afterwork' | 'random'
+let notifEnabled = localStorage.getItem('notif-enabled') === '1'
+let scheduledTimers = []
+
+function saveNotifPrefs() {
+  localStorage.setItem('notif-mode', notifMode)
+  localStorage.setItem('notif-enabled', notifEnabled ? '1' : '0')
+}
+
+function toggleBrowserNotif(on) {
+  if (!on) {
+    notifEnabled = false
+    saveNotifPrefs()
+    clearAllTimers()
+    showToast('ปิดการแจ้งเตือนแล้ว')
+    return
+  }
+  if (!('Notification' in window)) {
+    document.getElementById('notif-check').checked = false
+    showToast('เบราว์เซอร์ไม่รองรับ')
+    return
+  }
+  Notification.requestPermission().then(perm => {
+    if (perm === 'granted') {
+      notifEnabled = true
+      saveNotifPrefs()
+      scheduleToday()
+      showToast('เปิดการแจ้งเตือนแล้ว 🔔')
+      renderNotifSettings()
+    } else {
+      document.getElementById('notif-check').checked = false
+      showToast('กรุณาอนุญาต notification ในเบราว์เซอร์')
+    }
+  })
+}
+
+function setNotifMode(mode) {
+  notifMode = mode
+  saveNotifPrefs()
+  clearAllTimers()
+  if (notifEnabled) scheduleToday()
+  renderNotifSettings()
+  showToast(mode === 'afterwork' ? '⏰ แจ้งเตือนหลังเลิกงาน 17:00' : '🎲 สุ่มเวลาแจ้งเตือน')
+}
+
+function clearAllTimers() {
+  scheduledTimers.forEach(t => clearTimeout(t))
+  scheduledTimers = []
+}
+
+function scheduleToday() {
+  clearAllTimers()
+  const now = new Date()
+  const cutoff = new Date(now); cutoff.setHours(17,30,0,0)
+  if (now >= cutoff) return // past 17:30 today, nothing to do
+
+  let fireTime
+  if (notifMode === 'afterwork') {
+    // fire at 17:00 (or now+10s if already past 17:00)
+    const at17 = new Date(now); at17.setHours(17,0,0,0)
+    fireTime = at17 > now ? at17 : new Date(now.getTime() + 10000)
+    if (fireTime >= cutoff) fireTime = new Date(cutoff.getTime() - 60000) // 17:29
+  } else {
+    // random between now+1min and 17:30
+    const earliest = now.getTime() + 60000
+    const latest = cutoff.getTime()
+    if (earliest >= latest) { fireTime = new Date(now.getTime() + 10000) }
+    else { fireTime = new Date(earliest + Math.random() * (latest - earliest)) }
+  }
+
+  const delay = fireTime - now
+  const t = setTimeout(() => fireNotification(), delay)
+  scheduledTimers.push(t)
+
+  // schedule midnight reset for tomorrow
+  const midnight = new Date(now); midnight.setHours(24,0,5,0)
+  const t2 = setTimeout(() => { if(notifEnabled) scheduleToday() }, midnight - now)
+  scheduledTimers.push(t2)
+}
+
+function fireNotification() {
+  if (Notification.permission !== 'granted') return
+  const items = getReminders()
+  const urgent = items.filter(r => r.type === 'overdue' || r.type === 'today')
+  if (!urgent.length) return
+
+  const msgs = [
+    'อย่าลืมทำสิ่งที่ค้างอยู่วันนี้นะ! 💪',
+    'ยังมีงานรอคุณอยู่เลย อย่าลืมนะ 😊',
+    'เช็กรายการวันนี้ก่อนเลิกงานเลย! ✅',
+    'อย่าให้งานค้างข้ามวันนะ — ทำเดี๋ยวนี้เลย! 🚀',
+    'หมดวันแล้ว ยังมีรายการที่ต้องทำอีกนะ 📋',
+  ]
+  const randomMsg = msgs[Math.floor(Math.random() * msgs.length)]
+
+  // build body listing up to 3 items
+  const preview = urgent.slice(0,3).map(r => `• ${r.x.text}`).join('\n')
+  const extra = urgent.length > 3 ? `\n+อีก ${urgent.length-3} รายการ` : ''
+
+  const n = new Notification('🔔 อย่าลืม! มีรายการค้างอยู่', {
+    body: randomMsg + '\n' + preview + extra,
+    icon: '',
+    badge: '',
+    tag: 'planify-daily',
+    requireInteraction: true
+  })
+  n.onclick = () => { window.focus(); toggleRemindPanel(); n.close() }
+}
+
+function renderNotifSettings() {
+  const el = document.getElementById('notif-settings')
+  if (!el) return
+  const hint = notifMode === 'afterwork'
+    ? '⏰ แจ้งเตือนเวลา 17:00 น.'
+    : '🎲 สุ่มเวลาแจ้งเตือน ก่อน 17:30 น.'
+  el.innerHTML = `
+    <div class="ns-row">
+      <label class="ns-toggle">
+        <input type="checkbox" id="notif-check" ${notifEnabled?'checked':''} onchange="toggleBrowserNotif(this.checked)">
+        <div class="ns-slider"></div>
+      </label>
+      <span class="ns-label">แจ้งเตือนรายการค้างวันนี้</span>
+    </div>
+    ${notifEnabled ? `
+    <div class="ns-modes">
+      <button class="ns-mode-btn ${notifMode==='afterwork'?'on':''}" onclick="setNotifMode('afterwork')">⏰ หลังเลิกงาน<br><span style="font-weight:500;font-size:9px">17:00 น.</span></button>
+      <button class="ns-mode-btn ${notifMode==='random'?'on':''}" onclick="setNotifMode('random')">🎲 สุ่มเวลา<br><span style="font-weight:500;font-size:9px">ก่อน 17:30</span></button>
+    </div>
+    <div class="ns-time-hint">${hint}</div>
+    ` : ''}
+  `
+}
+
+// Close panel when clicking outside
+document.addEventListener('click', e => {
+  const panel = document.getElementById('remind-panel')
+  const bell = document.querySelector('.remind-bell')
+  if (remindPanelOpen && !panel.contains(e.target) && !bell.contains(e.target)) {
+    remindPanelOpen = false
+    panel.classList.remove('show')
+  }
+})
+
+loadData();render()
+renderRemindPanel()
+renderNotifSettings()
+// restore scheduled notifications if was enabled
+if (notifEnabled && Notification.permission === 'granted') scheduleToday()
+</script>

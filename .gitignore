@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Vercel
+.vercel/
+
+# Environment variables (passcode, tokens) — never commit these
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Personal raw photo dump (not part of the live site, ~1.3GB of HEIC/MOV originals)
+รูป/
+
+# Unused/unreferenced legacy assets (not linked from index.html or Portfolio.html)
+Recording 2026-06-14 160142.mp4
+s1.jpg
+s2.jpg
+s3.jpg
+s4.jpg
