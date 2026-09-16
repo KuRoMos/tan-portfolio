@@ -2202,8 +2202,8 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
                             <span class="hero-stat-label">Month of<br>experience</span>
                         </div>
                         <div class="hero-stat-divider"></div>
-                        <div class="hero-stat-item">
-                            <span id="stat-projects" class="hero-stat-number" style="text-decoration:none;">0</span>
+                        <div class="hero-stat-item" onclick="document.getElementById('projects-modal').style.display='flex'" style="cursor:pointer;" title="ดูโปรเจค">
+                            <span id="stat-projects" class="hero-stat-number" style="text-decoration:none;">1</span>
                             <span class="hero-stat-label">Project<br>completed</span>
                         </div>
                         <div class="hero-stat-divider"></div>
@@ -2510,7 +2510,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
             <div class="bento-grid">
 
                 <!-- 01 — Coding -->
-                <div class="bento-card bento-card--coding">
+                <div class="bento-card bento-card--coding" onclick="document.getElementById('projects-modal').style.display='flex'" style="cursor:pointer;">
                     <div class="bento-orb" style="background:#3B82F6;"></div>
                     <div class="bento-meta">
                         <span class="bento-num">— 01</span>
@@ -2874,6 +2874,121 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   };
 
   loadGallery(false);
+})();
+</script>
+
+<!-- ══ K. PROJECTS MODAL (slider) ══ -->
+<div id="projects-modal" style="display:none;position:fixed;inset:0;z-index:9998;align-items:center;justify-content:center;background:rgba(5,10,20,0.88);backdrop-filter:blur(10px);" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#0F172A;border:1px solid rgba(56,189,248,0.2);border-top:3px solid #38BDF8;max-width:900px;width:95vw;max-height:90vh;display:flex;flex-direction:column;position:relative;box-shadow:0 40px 100px rgba(0,0,0,0.7);border-radius:14px;overflow:hidden;">
+
+    <!-- Header -->
+    <div style="padding:1.25rem 1.75rem;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;background:#0F172A;flex-shrink:0;">
+      <div>
+        <div style="font-size:0.62rem;font-family:'Segoe UI',sans-serif;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:#38BDF8;margin-bottom:0.25rem;">Works &amp; Side Projects</div>
+        <div style="font-family:Georgia,serif;font-size:1.3rem;font-weight:bold;color:#F8FAFC;letter-spacing:-0.02em;">Coding Projects</div>
+      </div>
+      <!-- Slide counter -->
+      <div style="display:flex;align-items:center;gap:1.25rem;">
+        <span id="proj-counter" style="font-size:0.75rem;font-family:monospace;color:rgba(248,250,252,0.45);letter-spacing:0.1em;">1 / 1</span>
+        <button onclick="document.getElementById('projects-modal').style.display='none'" style="background:none;border:none;cursor:pointer;color:rgba(248,250,252,0.4);padding:0.25rem;display:flex;" onmouseover="this.style.color='#F8FAFC'" onmouseout="this.style.color='rgba(248,250,252,0.4)'">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Slider track -->
+    <div style="flex:1;overflow:hidden;position:relative;">
+      <div id="proj-track" style="display:flex;transition:transform 0.4s cubic-bezier(.4,0,.2,1);will-change:transform;">
+
+        <!-- ── Slide 1: ThunderLog ── -->
+        <div class="proj-slide" style="min-width:100%;overflow-y:auto;max-height:calc(90vh - 130px);">
+          <div style="width:100%;aspect-ratio:600/160;background:#0B1120;overflow:hidden;flex-shrink:0;">
+            <svg width="100%" height="100%" viewBox="0 0 600 160" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+              <rect width="600" height="160" fill="#0B1120"/>
+              <rect x="16" y="12" width="330" height="136" rx="5" fill="#0F172A"/>
+              <rect x="16" y="12" width="330" height="22" rx="5" fill="#1E293B"/>
+              <circle cx="30" cy="23" r="3.5" fill="#FF5F57"/><circle cx="42" cy="23" r="3.5" fill="#FEBC2E"/><circle cx="54" cy="23" r="3.5" fill="#28C840"/>
+              <text x="76" y="27" font-family="'Segoe UI',sans-serif" font-size="9" font-weight="700" fill="rgba(248,250,252,0.6)">ThunderLog — บันทึกงานประจำเดือน</text>
+
+              <rect x="28" y="46" width="306" height="26" rx="5" fill="rgba(122,92,240,0.12)" stroke="#7a5cf0" stroke-width="1"/>
+              <circle cx="42" cy="59" r="4" fill="none" stroke="#7a5cf0" stroke-width="1.5"/>
+              <text x="54" y="62" font-family="'Segoe UI',sans-serif" font-size="8.5" fill="#c9c2f7">งานหน้าที่หลัก — ภารกิจคงที่</text>
+
+              <rect x="28" y="80" width="306" height="26" rx="5" fill="rgba(14,168,122,0.12)" stroke="#0ea87a" stroke-width="1"/>
+              <circle cx="42" cy="93" r="4" fill="#0ea87a"/>
+              <path d="M39.5 93l2 2 3.5-4" stroke="#0B1120" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="54" y="96" font-family="'Segoe UI',sans-serif" font-size="8.5" fill="#8fe3c4">งานประจำ — เตือนก่อนครบกำหนด</text>
+
+              <rect x="28" y="114" width="306" height="26" rx="5" fill="rgba(224,56,159,0.12)" stroke="#e0389f" stroke-width="1"/>
+              <circle cx="42" cy="127" r="4" fill="none" stroke="#e0389f" stroke-width="1.5"/>
+              <text x="54" y="130" font-family="'Segoe UI',sans-serif" font-size="8.5" fill="#f2a8d6">งานเฉพาะกิจของเดือนนี้</text>
+
+              <circle cx="470" cy="72" r="34" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="9"/>
+              <circle cx="470" cy="72" r="34" fill="none" stroke="#0ea87a" stroke-width="9" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="59.8" transform="rotate(-90 470 72)"/>
+              <text x="470" y="68" font-family="'IBM Plex Mono',monospace" font-size="15" font-weight="700" fill="#F8FAFC" text-anchor="middle">72%</text>
+              <text x="470" y="82" font-family="'Segoe UI',sans-serif" font-size="7" fill="rgba(248,250,252,0.45)" text-anchor="middle">เดือนนี้</text>
+              <text x="470" y="122" font-family="'Segoe UI',sans-serif" font-size="8" fill="rgba(248,250,252,0.55)" text-anchor="middle">สรุปรายเดือน · ส่งออก CSV/Excel</text>
+            </svg>
+          </div>
+
+          <div style="padding:1.75rem;">
+            <span style="display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#38BDF8;border:1px solid rgba(56,189,248,0.3);border-radius:99px;padding:0.25rem 0.75rem;margin-bottom:1rem;">Personal Tool</span>
+            <h3 class="bento-title" style="margin-bottom:0.65rem;">ThunderLog</h3>
+            <p style="font-size:0.9rem;line-height:1.75;color:rgba(248,250,252,0.72);margin:0 0 1.25rem;">เว็บแอปบันทึกและติดตามงานประจำเดือนสำหรับใช้งานส่วนตัว แบ่งงานเป็น 3 หมวด — งานหน้าที่หลัก, งานประจำที่ทำซ้ำทุกเดือนพร้อมแจ้งเตือนใกล้ครบกำหนด และงานเฉพาะกิจที่เข้ามาระหว่างเดือน มีแดชบอร์ดสรุปเปอร์เซ็นต์งานเสร็จรายเดือน กราฟวงกลมสรุปงาน ค้นหาข้ามทุกเดือน แนบไฟล์ในแต่ละงาน และส่งออกเป็น CSV/Excel ได้</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.5rem;">
+              <span style="font-size:0.7rem;font-weight:600;padding:0.25rem 0.7rem;border:1px solid rgba(56,189,248,0.3);color:#38BDF8;border-radius:99px;">HTML/CSS/JS</span>
+              <span style="font-size:0.7rem;font-weight:600;padding:0.25rem 0.7rem;border:1px solid rgba(56,189,248,0.3);color:#38BDF8;border-radius:99px;">LocalStorage</span>
+              <span style="font-size:0.7rem;font-weight:600;padding:0.25rem 0.7rem;border:1px solid rgba(56,189,248,0.3);color:#38BDF8;border-radius:99px;">Data Viz</span>
+              <span style="font-size:0.7rem;font-weight:600;padding:0.25rem 0.7rem;border:1px solid rgba(56,189,248,0.3);color:#38BDF8;border-radius:99px;">CSV / Excel Export</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /slider area -->
+
+    <!-- Navigation bar -->
+    <div style="padding:0.85rem 1.75rem;border-top:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;background:#0F172A;flex-shrink:0;">
+      <!-- Dot indicators -->
+      <div style="display:flex;gap:0.5rem;" id="proj-dots">
+        <button onclick="projGoTo(0)" style="width:22px;height:8px;border-radius:99px;border:none;cursor:pointer;transition:all 0.3s;background:#38BDF8;"></button>
+      </div>
+      <!-- Prev / Next (nothing to page through yet) -->
+      <div style="display:flex;gap:0.6rem;">
+        <button id="proj-prev" onclick="projPrev()" style="opacity:0.35;display:flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:rgba(248,250,252,0.7);padding:0.45rem 1rem;border-radius:8px;cursor:pointer;font-size:0.82rem;font-weight:600;transition:all 0.2s;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
+          ก่อนหน้า
+        </button>
+        <button id="proj-next" onclick="projNext()" style="opacity:0.35;display:flex;align-items:center;gap:0.4rem;background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.3);color:#38BDF8;padding:0.45rem 1rem;border-radius:8px;cursor:pointer;font-size:0.82rem;font-weight:600;transition:all 0.2s;">
+          ถัดไป
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var cur = 0, total = 1;
+  function projGoTo(n){
+    cur = n;
+    document.getElementById('proj-track').style.transform = 'translateX(-' + (cur*100) + '%)';
+    document.getElementById('proj-counter').textContent = (cur+1) + ' / ' + total;
+    var dots = document.getElementById('proj-dots').querySelectorAll('button');
+    dots.forEach(function(d,i){ d.style.background = i===cur ? '#38BDF8' : 'rgba(255,255,255,0.2)'; });
+    document.getElementById('proj-prev').style.opacity = cur===0 ? '0.35' : '1';
+    document.getElementById('proj-next').style.opacity = cur===total-1 ? '0.35' : '1';
+  }
+  window.projGoTo = projGoTo;
+  window.projPrev = function(){ if(cur>0) projGoTo(cur-1); };
+  window.projNext = function(){ if(cur<total-1) projGoTo(cur+1); };
+  projGoTo(0);
+  document.getElementById('projects-modal').addEventListener('keydown', function(e){
+    if(e.key==='ArrowRight') window.projNext();
+    if(e.key==='ArrowLeft') window.projPrev();
+  });
 })();
 </script>
 
@@ -3422,7 +3537,7 @@ document.querySelectorAll('.timeline-item, .experience-item, .activity-item, .ho
 
     var STATS = [
         ['stat-months',   months],
-        ['stat-projects', 0],
+        ['stat-projects', 1],
         ['stat-tech',     skills]
     ];
 
