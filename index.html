@@ -1923,14 +1923,19 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 
     /* ── Code rain canvas ── */
     const canvas = document.getElementById('intro-canvas');
-    const ctx    = canvas.getContext('2d');
+    const ctx    = canvas.getContext('2d', { alpha: false });
     let W, H, raf, cols, drops, vg;
     const CHARS = '01ABCDEFabcdef{}[]()<>=+/\\|;:.アイウエオカキクケコ0123456789!@#$%^&*=>const';
-    const CW = 15;
+    const isMobile = window.innerWidth <= 768;
+    const CW = isMobile ? 22 : 15; // column กว้างขึ้นบนมือถือ = columns น้อยลง = เร็วขึ้น
 
     function resize() {
-        W = canvas.width  = window.innerWidth;
-        H = canvas.height = window.innerHeight;
+        // render ที่ 0.6x resolution บนมือถือ แล้ว scale ด้วย CSS
+        const scale = isMobile ? 0.6 : 1;
+        W = canvas.width  = Math.floor(window.innerWidth  * scale);
+        H = canvas.height = Math.floor(window.innerHeight * scale);
+        canvas.style.width  = '100%';
+        canvas.style.height = '100%';
         cols  = Math.ceil(W / CW);
         drops = Array.from({ length: cols }, () => Math.floor(Math.random() * -80));
         ctx.font = (CW - 1) + "px 'Courier New',monospace";
@@ -1944,10 +1949,17 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
     resize();
     window.addEventListener('resize', resize);
 
+    let frameSkip = 0;
     let lastFrame = 0;
     function drawRain(ts) {
         raf = requestAnimationFrame(drawRain);
-        if (ts - lastFrame < 33) return; /* cap ~30fps, plenty for this effect */
+
+        // บนมือถือ วาดทุก 2 frame (30fps แทน 60fps) — ลด CPU/GPU ลงครึ่ง
+        if (isMobile) {
+            if (frameSkip++ % 2 !== 0) return;
+        } else if (ts - lastFrame < 33) { // desktop: cap ~30fps, plenty for this effect
+            return;
+        }
         lastFrame = ts;
 
         ctx.fillStyle = 'rgba(2,12,26,0.15)';
