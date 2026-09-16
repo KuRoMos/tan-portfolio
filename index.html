@@ -1921,67 +1921,73 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 (function () {
     document.body.style.overflow = 'hidden';
 
-    /* ── Code rain canvas ── */
-    const canvas = document.getElementById('intro-canvas');
-    const ctx    = canvas.getContext('2d', { alpha: false });
-    let W, H, raf, cols, drops, vg;
-    const CHARS = '01ABCDEFabcdef{}[]()<>=+/\\|;:.アイウエオカキクケコ0123456789!@#$%^&*=>const';
+    /* ── Safety net: whatever else happens below, the intro MUST go away.
+       Registered first, before any canvas/animation code that could throw
+       and abort the rest of this script on some mobile browsers. ── */
+    setTimeout(function () {
+        var el = document.getElementById('intro-overlay');
+        if (el) { el.remove(); document.body.style.overflow = ''; }
+    }, 6500);
+
     const isMobile = window.innerWidth <= 768;
-    const CW = isMobile ? 22 : 15; // column กว้างขึ้นบนมือถือ = columns น้อยลง = เร็วขึ้น
+    let raf; // shared with the Exit block below, whether or not the canvas ran
 
-    function resize() {
-        // render ที่ 0.6x resolution บนมือถือ แล้ว scale ด้วย CSS
-        const scale = isMobile ? 0.6 : 1;
-        W = canvas.width  = Math.floor(window.innerWidth  * scale);
-        H = canvas.height = Math.floor(window.innerHeight * scale);
-        canvas.style.width  = '100%';
-        canvas.style.height = '100%';
-        cols  = Math.ceil(W / CW);
-        drops = Array.from({ length: cols }, () => Math.floor(Math.random() * -80));
-        ctx.font = (CW - 1) + "px 'Courier New',monospace";
+    /* ── Code rain canvas — desktop only. On mobile this decorative effect
+       isn't worth the crash/jank risk, so skip it entirely. ── */
+    if (!isMobile) {
+      try {
+        const canvas = document.getElementById('intro-canvas');
+        const ctx    = canvas.getContext('2d', { alpha: false });
+        let W, H, cols, drops, vg;
+        const CHARS = '01ABCDEFabcdef{}[]()<>=+/\\|;:.アイウエオカキクケコ0123456789!@#$%^&*=>const';
+        const CW = 15;
 
-        /* Centre vignette keeps text readable — cached, not rebuilt every frame */
-        vg = ctx.createRadialGradient(W/2, H/2, H * 0.04, W/2, H/2, H * 0.62);
-        vg.addColorStop(0,    'rgba(2,12,26,0.95)');
-        vg.addColorStop(0.5,  'rgba(2,12,26,0.28)');
-        vg.addColorStop(1,    'rgba(2,12,26,0)');
-    }
-    resize();
-    window.addEventListener('resize', resize);
+        function resize() {
+            W = canvas.width  = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+            cols  = Math.ceil(W / CW);
+            drops = Array.from({ length: cols }, () => Math.floor(Math.random() * -80));
+            ctx.font = (CW - 1) + "px 'Courier New',monospace";
 
-    let frameSkip = 0;
-    let lastFrame = 0;
-    function drawRain(ts) {
-        raf = requestAnimationFrame(drawRain);
-
-        // บนมือถือ วาดทุก 2 frame (30fps แทน 60fps) — ลด CPU/GPU ลงครึ่ง
-        if (isMobile) {
-            if (frameSkip++ % 2 !== 0) return;
-        } else if (ts - lastFrame < 33) { // desktop: cap ~30fps, plenty for this effect
-            return;
+            /* Centre vignette keeps text readable — cached, not rebuilt every frame */
+            vg = ctx.createRadialGradient(W/2, H/2, H * 0.04, W/2, H/2, H * 0.62);
+            vg.addColorStop(0,    'rgba(2,12,26,0.95)');
+            vg.addColorStop(0.5,  'rgba(2,12,26,0.28)');
+            vg.addColorStop(1,    'rgba(2,12,26,0)');
         }
-        lastFrame = ts;
+        resize();
+        window.addEventListener('resize', resize);
 
-        ctx.fillStyle = 'rgba(2,12,26,0.15)';
-        ctx.fillRect(0, 0, W, H);
+        let lastFrame = 0;
+        function drawRain(ts) {
+            raf = requestAnimationFrame(drawRain);
+            if (ts - lastFrame < 33) return; /* cap ~30fps, plenty for this effect */
+            lastFrame = ts;
 
-        for (let i = 0; i < cols; i++) {
-            const y = drops[i] * CW;
-            if (y < 0) { drops[i]++; continue; }
-            ctx.fillStyle = 'rgba(145,225,255,0.88)';
-            ctx.fillText(CHARS[Math.floor(Math.random() * CHARS.length)], i * CW, y);
-            if (drops[i] > 1) {
-                ctx.fillStyle = 'rgba(0,160,210,0.3)';
-                ctx.fillText(CHARS[Math.floor(Math.random() * CHARS.length)], i * CW, y - CW);
+            ctx.fillStyle = 'rgba(2,12,26,0.15)';
+            ctx.fillRect(0, 0, W, H);
+
+            for (let i = 0; i < cols; i++) {
+                const y = drops[i] * CW;
+                if (y < 0) { drops[i]++; continue; }
+                ctx.fillStyle = 'rgba(145,225,255,0.88)';
+                ctx.fillText(CHARS[Math.floor(Math.random() * CHARS.length)], i * CW, y);
+                if (drops[i] > 1) {
+                    ctx.fillStyle = 'rgba(0,160,210,0.3)';
+                    ctx.fillText(CHARS[Math.floor(Math.random() * CHARS.length)], i * CW, y - CW);
+                }
+                drops[i]++;
+                if (y > H + CW && Math.random() > 0.97) drops[i] = Math.floor(Math.random() * -35);
             }
-            drops[i]++;
-            if (y > H + CW && Math.random() > 0.97) drops[i] = Math.floor(Math.random() * -35);
-        }
 
-        ctx.fillStyle = vg;
-        ctx.fillRect(0, 0, W, H);
+            ctx.fillStyle = vg;
+            ctx.fillRect(0, 0, W, H);
+        }
+        raf = requestAnimationFrame(drawRain);
+      } catch (e) {
+        console.warn('intro canvas skipped:', e);
+      }
     }
-    raf = requestAnimationFrame(drawRain);
 
     /* ── Build name letter spans (paused, JS-triggered) ── */
     const nameEl = document.getElementById('intro-name');
