@@ -887,7 +887,7 @@ main > section.page-exit {
 
 /* Bento grid */
 .bento-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
 }
 @media (max-width: 640px) { .bento-grid { grid-template-columns: repeat(2, 1fr); } }
 
@@ -904,6 +904,13 @@ main > section.page-exit {
 .bento-card:hover { transform: translateY(-6px) scale(1.01); opacity: 1; }
 
 /* Per-card gradients */
+.bento-card--coding {
+    background: linear-gradient(145deg, rgba(30,64,175,0.45) 0%, rgba(8,14,30,0.97) 55%, rgba(91,33,182,0.2) 100%);
+}
+.bento-card--coding:hover {
+    border-color: rgba(96,165,250,0.55);
+    box-shadow: 0 28px 70px rgba(30,64,175,0.4), inset 0 1px 0 rgba(96,165,250,0.2);
+}
 .bento-card--cert {
     background: linear-gradient(145deg, rgba(180,83,9,0.45) 0%, rgba(8,14,30,0.97) 55%, rgba(220,38,38,0.18) 100%);
 }
@@ -2502,11 +2509,30 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
             <!-- Bento Grid -->
             <div class="bento-grid">
 
-                <!-- 01 — Certificates & Achievements -->
+                <!-- 01 — Coding -->
+                <div class="bento-card bento-card--coding" onclick="document.getElementById('projects-modal').style.display='flex'" style="cursor:pointer;">
+                    <div class="bento-orb" style="background:#3B82F6;"></div>
+                    <div class="bento-meta">
+                        <span class="bento-num">— 01</span>
+                        <div class="bento-arrow-wrap">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                    <span class="bento-emoji">💻</span>
+                    <p class="bento-category" style="color:#60a5fa;">Software Engineering</p>
+                    <h3 class="bento-title">Software &amp;<br>Innovation</h3>
+                    <div class="bento-footer">
+                        <span class="bento-tag">Full-Stack</span>
+                        <span class="bento-tag">Automation</span>
+                        <span class="bento-tag">Innovation</span>
+                    </div>
+                </div>
+
+                <!-- 02 — Certificates & Achievements -->
                 <div class="bento-card bento-card--cert" onclick="document.getElementById('cert-modal').style.display='flex'" style="cursor:pointer;">
                     <div class="bento-orb" style="background:#F59E0B;"></div>
                     <div class="bento-meta">
-                        <span class="bento-num">— 01</span>
+                        <span class="bento-num">— 02</span>
                         <div class="bento-arrow-wrap">
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
@@ -2521,11 +2547,11 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
                     </div>
                 </div>
 
-                <!-- 02 — Training & Workshops -->
+                <!-- 03 — Training & Workshops -->
                 <div class="bento-card bento-card--training" onclick="document.getElementById('training-modal').style.display='flex'" style="cursor:pointer;">
                     <div class="bento-orb" style="background:#8B5CF6;"></div>
                     <div class="bento-meta">
-                        <span class="bento-num">— 02</span>
+                        <span class="bento-num">— 03</span>
                         <div class="bento-arrow-wrap">
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
