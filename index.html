@@ -2923,7 +2923,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
       </div>
       <!-- Slide counter -->
       <div style="display:flex;align-items:center;gap:1.25rem;">
-        <span id="proj-counter" style="font-size:0.75rem;font-family:monospace;color:rgba(248,250,252,0.45);letter-spacing:0.1em;">1 / 1</span>
+        <span id="proj-counter" style="font-size:0.75rem;font-family:monospace;color:rgba(248,250,252,0.45);letter-spacing:0.1em;">1 / 2</span>
         <button onclick="document.getElementById('projects-modal').style.display='none'" style="background:none;border:none;cursor:pointer;color:rgba(248,250,252,0.4);padding:0.25rem;display:flex;" onmouseover="this.style.color='#F8FAFC'" onmouseout="this.style.color='rgba(248,250,252,0.4)'">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
@@ -2982,6 +2982,64 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
           </div>
         </div>
 
+        <!-- ── Slide 2: This Portfolio (meta) ── -->
+        <div class="proj-slide" style="min-width:100%;overflow-y:auto;max-height:calc(90vh - 130px);">
+          <div style="width:100%;aspect-ratio:600/160;background:#0B1120;overflow:hidden;flex-shrink:0;">
+            <svg width="100%" height="100%" viewBox="0 0 600 160" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+              <rect width="600" height="160" fill="#0B1120"/>
+
+              <!-- Chat panel -->
+              <rect x="16" y="12" width="270" height="136" rx="8" fill="#0F172A" stroke="rgba(255,255,255,0.08)"/>
+              <circle cx="34" cy="30" r="3" fill="#38BDF8"/>
+              <text x="44" y="34" font-family="'Segoe UI',sans-serif" font-size="9" font-weight="700" fill="rgba(248,250,252,0.6)">Claude Code</text>
+
+              <rect x="150" y="46" width="120" height="26" rx="12" fill="#1E293B"/>
+              <text x="160" y="63" font-family="'Segoe UI',sans-serif" font-size="8" fill="rgba(248,250,252,0.75)">เพิ่มระบบอัปโหลดรูป</text>
+
+              <rect x="28" y="80" width="150" height="26" rx="12" fill="rgba(56,189,248,0.12)" stroke="#38BDF8" stroke-width="1"/>
+              <text x="38" y="97" font-family="'Segoe UI',sans-serif" font-size="8" fill="#93c5fd">✓ ทำแล้ว — ลองดูได้เลย</text>
+
+              <rect x="150" y="114" width="120" height="26" rx="12" fill="#1E293B"/>
+              <text x="160" y="131" font-family="'Segoe UI',sans-serif" font-size="8" fill="rgba(248,250,252,0.75)">มือถือค้าง แก้ให้ที</text>
+
+              <!-- Arrow -->
+              <path d="M300 80 L340 80" stroke="rgba(56,189,248,0.6)" stroke-width="2" marker-end="url(#arrow)"/>
+              <defs>
+                <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                  <path d="M0 0 L8 4 L0 8 Z" fill="rgba(56,189,248,0.6)"/>
+                </marker>
+              </defs>
+
+              <!-- Browser window -->
+              <rect x="356" y="26" width="228" height="108" rx="6" fill="#0F172A" stroke="rgba(255,255,255,0.1)"/>
+              <rect x="356" y="26" width="228" height="18" rx="6" fill="#1E293B"/>
+              <circle cx="368" cy="35" r="3" fill="#FF5F57"/><circle cx="379" cy="35" r="3" fill="#FEBC2E"/><circle cx="390" cy="35" r="3" fill="#28C840"/>
+              <rect x="372" y="56" width="60" height="60" rx="50" fill="none" stroke="#38BDF8" stroke-width="2"/>
+              <rect x="444" y="60" width="120" height="10" rx="3" fill="rgba(248,250,252,0.7)"/>
+              <rect x="444" y="76" width="90" height="7" rx="3" fill="rgba(56,189,248,0.6)"/>
+              <rect x="372" y="122" width="60" height="7" rx="3" fill="rgba(255,255,255,0.15)"/>
+              <rect x="444" y="94" width="50" height="16" rx="8" fill="rgba(56,189,248,0.12)" stroke="#38BDF8" stroke-width="0.8"/>
+              <rect x="500" y="94" width="60" height="16" rx="8" fill="rgba(56,189,248,0.12)" stroke="#38BDF8" stroke-width="0.8"/>
+            </svg>
+          </div>
+
+          <div style="padding:1.75rem;">
+            <span style="display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#38BDF8;border:1px solid rgba(56,189,248,0.3);border-radius:99px;padding:0.25rem 0.75rem;margin-bottom:1rem;">Meta Project</span>
+            <h3 class="bento-title" style="margin-bottom:0.65rem;">This Portfolio</h3>
+            <p style="font-size:0.9rem;line-height:1.75;color:rgba(248,250,252,0.72);margin:0 0 1.25rem;">เว็บพอร์ตโฟลิโอทั้งเว็บนี้ถูกสร้างและพัฒนาต่อยอดทั้งหมดผ่านบทสนทนากับ Claude Code — ตั้งแต่ออกแบบหน้าตา เพิ่มระบบอัปโหลดรูปเกียรติบัตร/กิจกรรมที่แก้ไขได้เองจากหน้าเว็บ (ย้ายแบ็กเอนด์จาก PHP มาเป็น Node.js + Vercel Blob ตอนขึ้น Vercel จริง) ไล่ debug ปัญหาเว็บค้างบนมือถือจากวิดีโอที่อัดจริง ไปจนถึง deploy ขึ้น production พร้อมโดเมนและระบบวิเคราะห์ผู้เข้าชม — ทั้งหมดโดยไม่ต้องเขียนโค้ดเองสักบรรทัด</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.5rem;">
+              <span style="font-size:0.7rem;font-weight:600;padding:0.25rem 0.7rem;border:1px solid rgba(56,189,248,0.3);color:#38BDF8;border-radius:99px;">Claude Code</span>
+              <span style="font-size:0.7rem;font-weight:600;padding:0.25rem 0.7rem;border:1px solid rgba(56,189,248,0.3);color:#38BDF8;border-radius:99px;">Vercel</span>
+              <span style="font-size:0.7rem;font-weight:600;padding:0.25rem 0.7rem;border:1px solid rgba(56,189,248,0.3);color:#38BDF8;border-radius:99px;">Node.js</span>
+              <span style="font-size:0.7rem;font-weight:600;padding:0.25rem 0.7rem;border:1px solid rgba(56,189,248,0.3);color:#38BDF8;border-radius:99px;">AI Pair Programming</span>
+            </div>
+            <a href="https://github.com/KuRoMos/tan-portfolio" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.3);color:#38BDF8;padding:0.55rem 1.1rem;border-radius:8px;font-size:0.82rem;font-weight:600;text-decoration:none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              View Source
+            </a>
+          </div>
+        </div>
+
       </div>
     </div><!-- /slider area -->
 
@@ -2990,14 +3048,15 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
       <!-- Dot indicators -->
       <div style="display:flex;gap:0.5rem;" id="proj-dots">
         <button onclick="projGoTo(0)" style="width:22px;height:8px;border-radius:99px;border:none;cursor:pointer;transition:all 0.3s;background:#38BDF8;"></button>
+        <button onclick="projGoTo(1)" style="width:8px;height:8px;border-radius:99px;border:none;cursor:pointer;transition:all 0.3s;background:rgba(255,255,255,0.2);"></button>
       </div>
-      <!-- Prev / Next (nothing to page through yet) -->
+      <!-- Prev / Next -->
       <div style="display:flex;gap:0.6rem;">
         <button id="proj-prev" onclick="projPrev()" style="opacity:0.35;display:flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:rgba(248,250,252,0.7);padding:0.45rem 1rem;border-radius:8px;cursor:pointer;font-size:0.82rem;font-weight:600;transition:all 0.2s;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
           ก่อนหน้า
         </button>
-        <button id="proj-next" onclick="projNext()" style="opacity:0.35;display:flex;align-items:center;gap:0.4rem;background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.3);color:#38BDF8;padding:0.45rem 1rem;border-radius:8px;cursor:pointer;font-size:0.82rem;font-weight:600;transition:all 0.2s;">
+        <button id="proj-next" onclick="projNext()" style="opacity:1;display:flex;align-items:center;gap:0.4rem;background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.3);color:#38BDF8;padding:0.45rem 1rem;border-radius:8px;cursor:pointer;font-size:0.82rem;font-weight:600;transition:all 0.2s;">
           ถัดไป
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg>
         </button>
@@ -3009,13 +3068,16 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 
 <script>
 (function(){
-  var cur = 0, total = 1;
+  var cur = 0, total = 2;
   function projGoTo(n){
     cur = n;
     document.getElementById('proj-track').style.transform = 'translateX(-' + (cur*100) + '%)';
     document.getElementById('proj-counter').textContent = (cur+1) + ' / ' + total;
     var dots = document.getElementById('proj-dots').querySelectorAll('button');
-    dots.forEach(function(d,i){ d.style.background = i===cur ? '#38BDF8' : 'rgba(255,255,255,0.2)'; });
+    dots.forEach(function(d,i){
+      d.style.background = i===cur ? '#38BDF8' : 'rgba(255,255,255,0.2)';
+      d.style.width = i===cur ? '22px' : '8px';
+    });
     document.getElementById('proj-prev').style.opacity = cur===0 ? '0.35' : '1';
     document.getElementById('proj-next').style.opacity = cur===total-1 ? '0.35' : '1';
   }
@@ -3040,6 +3102,10 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
             </svg>
             <p>© 2026 Tan Akrthum. All rights reserved.</p>
         </div>
+        <button type="button" onclick="document.getElementById('qr-modal').style.display='flex'" title="Scan to visit" style="display:flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.3rem 0.6rem 0.3rem 0.3rem;cursor:pointer;">
+            <img src="images/qr-code.png" alt="QR code to this portfolio" loading="lazy" decoding="async" style="width:28px;height:28px;border-radius:4px;background:#fff;display:block;">
+            <span style="font-size:0.68rem;color:rgba(248,250,252,0.5);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Scan to visit</span>
+        </button>
         <nav aria-label="Social links">
             <ul class="social-list">
                 <li><a href="mailto:tanakrthum2546@gmail.com" class="social-icon" aria-label="Email">✉</a></li>
@@ -3047,6 +3113,18 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
         </nav>
     </div>
 </footer>
+
+<!-- ══ QR CODE MODAL ══ -->
+<div id="qr-modal" style="display:none;position:fixed;inset:0;z-index:9998;align-items:center;justify-content:center;background:rgba(5,10,20,0.88);backdrop-filter:blur(10px);" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#0F172A;border:1px solid rgba(56,189,248,0.2);border-top:3px solid #38BDF8;max-width:340px;width:90vw;padding:1.75rem;border-radius:14px;box-shadow:0 40px 100px rgba(0,0,0,0.7);text-align:center;position:relative;">
+    <button onclick="document.getElementById('qr-modal').style.display='none'" style="position:absolute;top:0.9rem;right:0.9rem;background:none;border:none;cursor:pointer;color:rgba(248,250,252,0.4);padding:0.25rem;display:flex;" onmouseover="this.style.color='#F8FAFC'" onmouseout="this.style.color='rgba(248,250,252,0.4)'">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <img src="images/qr-code.png" alt="QR code to this portfolio" style="width:220px;height:220px;border-radius:10px;background:#fff;padding:10px;margin:0.5rem auto 1.1rem;display:block;">
+    <div style="font-family:Georgia,serif;font-size:1.05rem;font-weight:bold;color:#F8FAFC;margin-bottom:0.3rem;">Scan to visit</div>
+    <div style="font-size:0.8rem;color:rgba(248,250,252,0.5);word-break:break-all;">web-thander-portfolio.vercel.app</div>
+  </div>
+</div>
 
 <!-- ══ M. CONTACT MODAL (popup ติดต่องาน + form + OTP) ══ -->
 <!-- CONTACT MODAL -->
