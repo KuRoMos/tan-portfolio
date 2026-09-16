@@ -3061,7 +3061,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
             </svg>
             <p>© 2026 Tan Akrthum. All rights reserved.</p>
         </div>
-        <button type="button" onclick="document.getElementById('qr-modal').style.display='flex'" title="Scan to visit" style="display:flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.3rem 0.6rem 0.3rem 0.3rem;cursor:pointer;">
+        <button type="button" id="qr-share-btn" onclick="document.getElementById('qr-modal').style.display='flex'" title="Scan to visit" style="display:flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.3rem 0.6rem 0.3rem 0.3rem;cursor:pointer;">
             <img src="images/qr-code.png" alt="QR code to this portfolio" loading="lazy" decoding="async" style="width:28px;height:28px;border-radius:4px;background:#fff;display:block;">
             <span style="font-size:0.68rem;color:rgba(248,250,252,0.5);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Scan to visit</span>
         </button>
@@ -3504,6 +3504,8 @@ function navigateTo(page, pushState = true) {
 
         currentPage = page;
         setActiveNavLinks(page);
+        const qrBtn = document.getElementById('qr-share-btn');
+        if (qrBtn) qrBtn.style.display = (page === 'home') ? 'flex' : 'none';
 
         // Update URL hash without jumping
         if (pushState) {
@@ -3552,6 +3554,8 @@ window.addEventListener('popstate', (e) => {
     });
     currentPage = initPage;
     setActiveNavLinks(initPage);
+    const qrBtn = document.getElementById('qr-share-btn');
+    if (qrBtn) qrBtn.style.display = (initPage === 'home') ? 'flex' : 'none';
 })();
 
 
