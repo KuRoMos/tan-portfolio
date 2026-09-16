@@ -1940,12 +1940,17 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
     /* ── Safety net: whatever else happens below, the intro MUST go away.
        Registered first, before any canvas/animation code that could throw
        and abort the rest of this script on some mobile browsers. ── */
+    const isMobile = window.innerWidth <= 768;
+    // Mobile traffic is mostly social-app in-app browsers (Instagram/LINE/etc.)
+    // where people bail if nothing happens within a couple seconds — no code
+    // rain to watch there anyway, so don't make them wait as long.
+    const introExitDelay = isMobile ? 1900 : 4900;
+
     setTimeout(function () {
         var el = document.getElementById('intro-overlay');
         if (el) { el.remove(); document.body.style.overflow = ''; }
-    }, 6500);
+    }, introExitDelay + 1800);
 
-    const isMobile = window.innerWidth <= 768;
     let raf; // shared with the Exit block below, whether or not the canvas ran
 
     /* ── Code rain canvas — desktop only. On mobile this decorative effect
@@ -2026,21 +2031,28 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
         }, ms);
     }
 
-    /* ── Boot sequence ── */
+    /* ── Boot sequence (faster on mobile so the exit timer above still lines up) ── */
+    const typeMs  = isMobile ? 5   : 11;
+    const typeMs2 = isMobile ? 4   : 9;
+    const stepGap = isMobile ? 20  : 45;
+    const toReveal= isMobile ? 120 : 260;
+    const letterMs= isMobile ? 25  : 44;
+    const bootStart = isMobile ? 100 : 230;
+
     function boot() {
         typewrite(document.getElementById('it1'),
-            '> portfolio --deploy --mode=legendary', 11,
+            '> portfolio --deploy --mode=legendary', typeMs,
         () => setTimeout(() =>
             typewrite(document.getElementById('it2'),
-                '  ████████████████████████  100%', 9,
+                '  ████████████████████████  100%', typeMs2,
             () => setTimeout(() =>
                 typewrite(document.getElementById('it3'),
-                    '  ✔  STATUS: LEGENDARY — CONFIRMED', 11,
-                () => setTimeout(reveal, 260))
-            , 45))
-        , 45));
+                    '  ✔  STATUS: LEGENDARY — CONFIRMED', typeMs,
+                () => setTimeout(reveal, toReveal))
+            , stepGap))
+        , stepGap));
     }
-    setTimeout(boot, 230);
+    setTimeout(boot, bootStart);
 
     /* ── Reveal: fire all paused animations ── */
     function reveal() {
@@ -2048,15 +2060,15 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 
         /* Letter stagger */
         document.querySelectorAll('.nl').forEach((span, i) => {
-            setTimeout(() => { span.style.animationPlayState = 'running'; }, i * 44);
+            setTimeout(() => { span.style.animationPlayState = 'running'; }, i * letterMs);
         });
 
         /* Other elements */
         const seq = [
-            ['intro-kicker',  160],
-            ['intro-sub',     260],
-            ['intro-tagrow',  440],
-            ['intro-name',    11 * 44 + 200], /* glow breathe starts after last letter */
+            ['intro-kicker',  isMobile ? 90  : 160],
+            ['intro-sub',     isMobile ? 150 : 260],
+            ['intro-tagrow',  isMobile ? 250 : 440],
+            ['intro-name',    11 * letterMs + (isMobile ? 100 : 200)], /* glow breathe starts after last letter */
         ];
         seq.forEach(([id, delay]) => {
             setTimeout(() => {
@@ -2076,7 +2088,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
             // trigger counter ตรงๆ ไม่ต้องรอ MutationObserver
             if (typeof window.__runStats === 'function') window.__runStats();
         }, 1300);
-    }, 4900);
+    }, introExitDelay);
 })();
 </script>
 <!-- ═══════════════════════════════════════════════════ -->
