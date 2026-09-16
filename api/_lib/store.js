@@ -66,7 +66,11 @@ export async function readGallery() {
   if (!blob) {
     return structuredClone(SEED_GALLERY);
   }
-  const res = await fetch(blob.url, { cache: 'no-store' });
+  // Vercel Blob's public CDN can serve a cached copy of the file for a short
+  // window after an overwrite; a cache-busting query param plus no-store
+  // forces a fresh read so add/edit/delete never operate on stale data.
+  const freshUrl = blob.url + (blob.url.includes('?') ? '&' : '?') + '_=' + Date.now();
+  const res = await fetch(freshUrl, { cache: 'no-store' });
   if (!res.ok) return structuredClone(SEED_GALLERY);
   const data = await res.json().catch(() => null);
   if (!data || typeof data !== 'object') return structuredClone(SEED_GALLERY);
