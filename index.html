@@ -1049,6 +1049,22 @@ main > section.page-exit {
     .experience-card { padding: var(--spacing-4); }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* ── Mobile performance ── */
+@media (max-width: 768px) {
+    /* ปิด backdrop-filter blur (GPU-heavy มากบนมือถือ) */
+    nav, .nav-container, header { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: rgba(5,10,20,0.97) !important; }
+    #gaming-modal, #projects-modal { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+    /* ลด box-shadow ซับซ้อน */
+    .project-card, .experience-card, .cert-card { box-shadow: 0 2px 12px rgba(0,0,0,0.4) !important; }
+    /* promote layers ที่ animate บ่อย */
+    .hero-stat-number { will-change: contents; }
+    /* ลด transition ให้รวดเร็วขึ้น */
+    * { transition-duration: 0.15s !important; }
+    /* ยกเว้น animation ที่ตั้งใจไว้ */
+    .hero-stat-number, #intro-overlay, #intro-overlay * { transition-duration: revert !important; }
+}
+
 a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 
 /* ── 14. MOBILE RESPONSIVE ── */
@@ -2094,6 +2110,8 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
         setTimeout(() => {
             document.getElementById('intro-overlay').remove();
             document.body.style.overflow = '';
+            // trigger counter ตรงๆ ไม่ต้องรอ MutationObserver
+            if (typeof window.__runStats === 'function') window.__runStats();
         }, 1300);
     }, introExitDelay);
 })();
@@ -2250,7 +2268,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
                         </div>
                         <div class="hero-stat-divider"></div>
                         <div class="hero-stat-item">
-                            <span id="stat-tech" class="hero-stat-number">6</span>
+                            <span id="stat-tech" class="hero-stat-number">8</span>
                             <span class="hero-stat-label">Technologies<br>mastered</span>
                         </div>
                     </div>
