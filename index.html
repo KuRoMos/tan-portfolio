@@ -2949,7 +2949,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
       </div>
       <!-- Slide counter -->
       <div style="display:flex;align-items:center;gap:1.25rem;">
-        <span id="proj-counter" style="font-size:0.75rem;font-family:monospace;color:rgba(248,250,252,0.45);letter-spacing:0.1em;">1 / 2</span>
+        <span id="proj-counter" style="font-size:0.75rem;font-family:monospace;color:rgba(248,250,252,0.45);letter-spacing:0.1em;">1 / 3</span>
         <button onclick="document.getElementById('projects-modal').style.display='none'" style="background:none;border:none;cursor:pointer;color:rgba(248,250,252,0.4);padding:0.25rem;display:flex;" onmouseover="this.style.color='#F8FAFC'" onmouseout="this.style.color='rgba(248,250,252,0.4)'">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
@@ -3071,6 +3071,54 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
           </div>
         </div>
 
+        <!-- ── Slide 3: SUMKIN FOOD ── -->
+        <div class="proj-slide" style="min-width:100%;overflow-y:auto;max-height:calc(90vh - 130px);">
+          <div style="width:100%;aspect-ratio:600/160;background:#0B1120;overflow:hidden;flex-shrink:0;">
+            <svg width="100%" height="100%" viewBox="0 0 600 160" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+              <rect width="600" height="160" fill="#0B1120"/>
+              <rect x="16" y="12" width="330" height="136" rx="5" fill="#0F172A"/>
+              <rect x="16" y="12" width="330" height="22" rx="5" fill="#1E293B"/>
+              <circle cx="30" cy="23" r="3.5" fill="#FF5F57"/><circle cx="42" cy="23" r="3.5" fill="#FEBC2E"/><circle cx="54" cy="23" r="3.5" fill="#28C840"/>
+              <text x="76" y="27" font-family="'Segoe UI',sans-serif" font-size="9" font-weight="700" fill="rgba(248,250,252,0.6)">SUMKIN FOOD — สุ่มเมนูอร่อย</text>
+
+              <rect x="28" y="46" width="306" height="26" rx="5" fill="rgba(255,107,53,0.14)" stroke="#FF6B35" stroke-width="1"/>
+              <circle cx="42" cy="59" r="4" fill="none" stroke="#FF6B35" stroke-width="1.5"/>
+              <text x="54" y="62" font-family="'Segoe UI',sans-serif" font-size="8.5" fill="#ffb999">เลือกเขต — ครบ 50 เขต กทม.</text>
+
+              <rect x="28" y="80" width="306" height="26" rx="5" fill="rgba(30,158,107,0.12)" stroke="#1E9E6B" stroke-width="1"/>
+              <circle cx="42" cy="93" r="4" fill="#1E9E6B"/>
+              <path d="M39.5 93l2 2 3.5-4" stroke="#0B1120" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="54" y="96" font-family="'Segoe UI',sans-serif" font-size="8.5" fill="#8fe0bf">สุ่มเมนูแล้ว — ร้านใกล้ตัวคุณ</text>
+
+              <rect x="28" y="114" width="306" height="26" rx="5" fill="rgba(255,107,53,0.14)" stroke="#FF6B35" stroke-width="1"/>
+              <circle cx="42" cy="127" r="4" fill="none" stroke="#FF6B35" stroke-width="1.5"/>
+              <text x="54" y="130" font-family="'Segoe UI',sans-serif" font-size="8.5" fill="#ffb999">แผนที่ร้าน — Leaflet + OpenStreetMap</text>
+
+              <circle cx="470" cy="72" r="34" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="9"/>
+              <circle cx="470" cy="72" r="34" fill="none" stroke="#FF6B35" stroke-width="9" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="0" transform="rotate(-90 470 72)"/>
+              <text x="470" y="68" font-family="'IBM Plex Mono',monospace" font-size="15" font-weight="700" fill="#F8FAFC" text-anchor="middle">50</text>
+              <text x="470" y="82" font-family="'Segoe UI',sans-serif" font-size="7" fill="rgba(248,250,252,0.45)" text-anchor="middle">เขต กทม.</text>
+              <text x="470" y="122" font-family="'Segoe UI',sans-serif" font-size="8" fill="rgba(248,250,252,0.55)" text-anchor="middle">สุ่มเมนู · แผนที่ · PWA ติดตั้งได้</text>
+            </svg>
+          </div>
+
+          <div style="padding:1.75rem;">
+            <span style="display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#38BDF8;border:1px solid rgba(56,189,248,0.3);border-radius:99px;padding:0.25rem 0.75rem;margin-bottom:1rem;">Personal Tool</span>
+            <h3 class="bento-title" style="margin-bottom:0.65rem;">SUMKIN FOOD</h3>
+            <p style="font-size:0.9rem;line-height:1.75;color:rgba(248,250,252,0.72);margin:0 0 1.25rem;">เว็บแอปสุ่มเมนูอาหารครอบคลุมทั้ง 50 เขตของกรุงเทพฯ เลือกเขตที่ต้องการแล้วให้ระบบสุ่มร้าน/เมนูให้ พร้อมแผนที่ร้านแถวนั้นแบบเรียลไทม์ผ่าน Leaflet และข้อมูลร้านจาก OpenStreetMap (Overpass API) โดยมี serverless function เป็นตัวพร็อกซีและแคชคำขอ รองรับติดตั้งเป็น PWA ใช้งานแบบแอปได้ทั้งบนมือถือและเดสก์ท็อป</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.5rem;">
+              <span style="font-size:0.7rem;font-weight:600;padding:0.25rem 0.7rem;border:1px solid rgba(56,189,248,0.3);color:#38BDF8;border-radius:99px;">HTML/CSS/JS</span>
+              <span style="font-size:0.7rem;font-weight:600;padding:0.25rem 0.7rem;border:1px solid rgba(56,189,248,0.3);color:#38BDF8;border-radius:99px;">Leaflet / OpenStreetMap</span>
+              <span style="font-size:0.7rem;font-weight:600;padding:0.25rem 0.7rem;border:1px solid rgba(56,189,248,0.3);color:#38BDF8;border-radius:99px;">Serverless API</span>
+              <span style="font-size:0.7rem;font-weight:600;padding:0.25rem 0.7rem;border:1px solid rgba(56,189,248,0.3);color:#38BDF8;border-radius:99px;">PWA</span>
+            </div>
+            <a href="https://sumkin-food-lake.vercel.app" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.3);color:#38BDF8;padding:0.55rem 1.1rem;border-radius:8px;font-size:0.82rem;font-weight:600;text-decoration:none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              View Project
+            </a>
+          </div>
+        </div>
+
       </div>
     </div><!-- /slider area -->
 
@@ -3080,6 +3128,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
       <div style="display:flex;gap:0.5rem;" id="proj-dots">
         <button onclick="projGoTo(0)" style="width:22px;height:8px;border-radius:99px;border:none;cursor:pointer;transition:all 0.3s;background:#38BDF8;"></button>
         <button onclick="projGoTo(1)" style="width:8px;height:8px;border-radius:99px;border:none;cursor:pointer;transition:all 0.3s;background:rgba(255,255,255,0.2);"></button>
+        <button onclick="projGoTo(2)" style="width:8px;height:8px;border-radius:99px;border:none;cursor:pointer;transition:all 0.3s;background:rgba(255,255,255,0.2);"></button>
       </div>
       <!-- Prev / Next -->
       <div style="display:flex;gap:0.6rem;">
@@ -3099,7 +3148,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 
 <script>
 (function(){
-  var cur = 0, total = 2;
+  var cur = 0, total = 3;
   function projGoTo(n){
     cur = n;
     document.getElementById('proj-track').style.transform = 'translateX(-' + (cur*100) + '%)';
