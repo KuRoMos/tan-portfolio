@@ -775,43 +775,82 @@ main > section.page-exit {
 }
 .tool-icon { font-size: 1.6rem; line-height: 1; }
 .tool-icon-img { width: 2rem; height: 2rem; object-fit: contain; }
-.coding-skill-icon { width: 18px; height: 18px; object-fit: contain; flex-shrink: 0; }
-.coding-skill-header { display: flex; align-items: center; gap: 6px; }
+/* Coding Activity — live GitHub stats block */
+.gh-live-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; text-transform: none;
+    color: #6ee7b7; background: rgba(16,185,129,0.12);
+    border: 1px solid rgba(16,185,129,0.35); border-radius: 99px;
+    padding: 0.2rem 0.6rem 0.2rem 0.5rem;
+}
+.gh-live-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #34d399; flex-shrink: 0;
+    box-shadow: 0 0 0 0 rgba(52,211,153,0.6);
+    animation: ghPulse 1.8s ease-out infinite;
+}
+@keyframes ghPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(52,211,153,0.55); }
+    70%  { box-shadow: 0 0 0 6px rgba(52,211,153,0); }
+    100% { box-shadow: 0 0 0 0 rgba(52,211,153,0); }
+}
+.gh-live-badge.is-error { color: #fca5a5; background: rgba(224,57,106,0.1); border-color: rgba(224,57,106,0.35); }
+.gh-live-badge.is-error .gh-live-dot { background: #e0396a; animation: none; }
 
-/* Coding skill bars */
-.skills-intro {
-    font-size: 0.72rem; color: rgba(248,250,252,0.5); letter-spacing: 0.1em;
-    text-transform: uppercase; font-weight: 700;
+.gh-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+.gh-stat-tile {
+    display: flex; flex-direction: column; gap: 0.2rem;
+    padding: 0.65rem 0.6rem;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 10px;
+    background: rgba(255,255,255,0.04);
 }
-.coding-skills-grid { display: flex; flex-direction: column; gap: 0.6rem; }
-.coding-skill {
-    display: flex; align-items: center; gap: 10px;
+.gh-stat-value {
+    font-size: 1.1rem; font-weight: 700; color: #F8FAFC; font-variant-numeric: tabular-nums;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.coding-skill-header { display: none; }
-.skill-label {
-    display: flex; align-items: center; gap: 8px; width: 120px; flex-shrink: 0;
+.gh-stat-label {
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgba(248,250,252,0.45);
 }
-.coding-skill-name {
-    font-size: 0.85rem; font-weight: 600; color: #F8FAFC; white-space: nowrap;
+
+.gh-lang-mix { margin-top: 0.9rem; }
+.gh-lang-bar {
+    display: flex; width: 100%; height: 10px; border-radius: 99px; overflow: hidden;
+    background: rgba(255,255,255,0.08);
 }
-.coding-skill-pct {
-    font-size: 0.75rem; font-weight: 700; color: #60a5fa; width: 32px; text-align: right; flex-shrink: 0;
+.gh-lang-bar-seg { height: 100%; transition: width 0.9s cubic-bezier(.4,0,.2,1); }
+.gh-lang-bar-skel, .gh-legend-skel {
+    background: linear-gradient(90deg, rgba(255,255,255,0.06) 25%, rgba(255,255,255,0.14) 37%, rgba(255,255,255,0.06) 63%);
+    background-size: 400% 100%; animation: ghSkeleton 1.6s ease-in-out infinite;
 }
-.skill-bar-track {
-    flex: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 99px; overflow: hidden;
+.gh-lang-bar-skel { width: 100%; height: 100%; }
+@keyframes ghSkeleton { 0% { background-position: 100% 0; } 100% { background-position: 0 0; } }
+.gh-lang-legend { list-style: none; margin: 0.6rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.35rem; }
+.gh-lang-legend li {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.78rem; color: rgba(248,250,252,0.75);
 }
-.skill-bar-fill {
-    height: 100%; border-radius: 99px;
-    background: linear-gradient(90deg, #1D4ED8, #3B82F6, #38BDF8, #7C3AED);
-    background-size: 200% 100%;
-    transition: width 1s cubic-bezier(.4,0,.2,1);
-    animation: skillShimmer 3s ease-in-out infinite;
-    box-shadow: 0 0 8px rgba(56,189,248,0.5);
+.gh-legend-skel { height: 14px; border-radius: 4px; width: 70%; }
+.gh-legend-skel:nth-child(2) { width: 52%; }
+.gh-legend-skel:nth-child(3) { width: 38%; }
+.gh-legend-dot { width: 9px; height: 9px; border-radius: 3px; flex-shrink: 0; }
+.gh-legend-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gh-legend-pct { font-weight: 700; color: #60a5fa; font-variant-numeric: tabular-nums; flex-shrink: 0; }
+
+.gh-sync-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+    margin-top: 0.85rem; padding-top: 0.65rem; border-top: 1px solid rgba(255,255,255,0.08);
 }
-@keyframes skillShimmer {
-    0%, 100% { background-position: 0% 50%; filter: brightness(1); }
-    50%       { background-position: 100% 50%; filter: brightness(1.3); }
+.gh-sync-note { font-size: 0.68rem; color: rgba(248,250,252,0.4); }
+.gh-sync-note.is-error { color: #f2a8bf; }
+.gh-refresh-btn {
+    width: 26px; height: 26px; border-radius: 8px; flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05);
+    color: rgba(248,250,252,0.55); cursor: pointer; font-size: 0.85rem; line-height: 1;
+    transition: var(--transition);
 }
+.gh-refresh-btn:hover { border-color: #38BDF8; color: #38BDF8; background: rgba(56,189,248,0.12); }
+.gh-refresh-btn.is-spinning { animation: ghSpin 0.7s linear; }
+@keyframes ghSpin { to { transform: rotate(360deg); } }
 
 /* Category tags */
 .skill-categories { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
@@ -1888,9 +1927,9 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
     .skills-section { padding: 2.5rem 1rem !important; }
     .tool-box { padding: 0.65rem 0.5rem; font-size: 0.68rem; }
     .tool-icon-img { width: 1.6rem; height: 1.6rem; }
-    .coding-skill-name { font-size: 0.78rem; }
-    .coding-skill-pct { font-size: 0.7rem; width: 28px; }
-    .skill-bar-track { height: 5px; }
+    .gh-stats-row { gap: 0.45rem; }
+    .gh-stat-value { font-size: 0.95rem; }
+    .gh-stat-label { font-size: 0.56rem; }
     .category-tag { font-size: 0.68rem; padding: 0.35rem 0.75rem; }
 
     /* Language cards */
@@ -1952,7 +1991,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 @media (max-width: 768px) {
     .hero-section::before,
     .profile-image-container,
-    .skill-bar-fill,
+    .gh-live-dot,
     .exp-current-dot {
         animation: none !important;
     }
@@ -2455,21 +2494,29 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
             <p class="section-kicker kicker-dark">Expertise &amp; Languages</p>
             <h2 class="section-heading" style="margin-top:0;">Skills &amp; Language</h2>
             <div class="skills-grid">
-                <!-- Software Skills -->
+                <!-- Software & Tools -->
                 <div class="skills-column">
-                    <h3 class="skills-subtitle">Software Skills</h3>
+                    <h3 class="skills-subtitle">Software &amp; Tools</h3>
                     <div class="tools-grid" role="list" aria-label="Software tools">
                         <div class="tool-box" role="listitem">
                             <img class="tool-icon-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code">
                             <span>VS Code</span>
                         </div>
                         <div class="tool-box" role="listitem">
-                            <img class="tool-icon-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma">
-                            <span>Figma</span>
-                        </div>
-                        <div class="tool-box" role="listitem">
                             <img class="tool-icon-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
                             <span>Git</span>
+                        </div>
+                        <div class="tool-box" role="listitem">
+                            <img class="tool-icon-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="filter:invert(1);">
+                            <span>GitHub</span>
+                        </div>
+                        <div class="tool-box" role="listitem">
+                            <img class="tool-icon-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" alt="Vercel" style="filter:invert(1);">
+                            <span>Vercel</span>
+                        </div>
+                        <div class="tool-box" role="listitem">
+                            <img class="tool-icon-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma">
+                            <span>Figma</span>
                         </div>
                         <div class="tool-box" role="listitem">
                             <img class="tool-icon-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg" alt="Photoshop">
@@ -2478,53 +2525,44 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
                     </div>
                 </div>
 
-                <!-- Coding Skills -->
+                <!-- Coding Activity — pulled live from the GitHub API, not a guessed percentage -->
                 <div class="skills-column">
-                    <h3 class="skills-subtitle">Coding Skills</h3>
-                    <div class="coding-skills-grid">
-                        <div class="coding-skill">
-                            <span class="skill-label"><img class="coding-skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML"><span class="coding-skill-name">HTML</span></span>
-                            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:95%"></div></div>
-                            <span class="coding-skill-pct">95%</span>
+                    <h3 class="skills-subtitle" style="display:flex;align-items:center;gap:0.65rem;flex-wrap:wrap;">
+                        Coding Activity
+                        <span class="gh-live-badge" id="gh-live-badge" title="ข้อมูลจริงจาก GitHub API ของ tanakrthum254614-max แบบเรียลไทม์">
+                            <span class="gh-live-dot"></span>Live · GitHub
+                        </span>
+                    </h3>
+
+                    <div class="gh-stats-row" id="gh-stats-row">
+                        <div class="gh-stat-tile">
+                            <span class="gh-stat-value" id="gh-stat-repos">–</span>
+                            <span class="gh-stat-label">Public Repos</span>
                         </div>
-                        <div class="coding-skill">
-                            <span class="skill-label"><img class="coding-skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS"><span class="coding-skill-name">CSS</span></span>
-                            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div>
-                            <span class="coding-skill-pct">90%</span>
+                        <div class="gh-stat-tile">
+                            <span class="gh-stat-value" id="gh-stat-active">–</span>
+                            <span class="gh-stat-label">Last Push</span>
                         </div>
-                        <div class="coding-skill">
-                            <span class="skill-label"><img class="coding-skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"><span class="coding-skill-name">JavaScript</span></span>
-                            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
-                            <span class="coding-skill-pct">85%</span>
-                        </div>
-                        <div class="coding-skill">
-                            <span class="skill-label"><img class="coding-skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript"><span class="coding-skill-name">TypeScript</span></span>
-                            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
-                            <span class="coding-skill-pct">75%</span>
-                        </div>
-                        <div class="coding-skill">
-                            <span class="skill-label"><img class="coding-skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"><span class="coding-skill-name">React</span></span>
-                            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>
-                            <span class="coding-skill-pct">80%</span>
-                        </div>
-                        <div class="coding-skill">
-                            <span class="skill-label"><img class="coding-skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" style="filter:invert(1);"><span class="coding-skill-name">Next.js</span></span>
-                            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:70%"></div></div>
-                            <span class="coding-skill-pct">70%</span>
-                        </div>
-                        <div class="coding-skill">
-                            <span class="skill-label"><img class="coding-skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"><span class="coding-skill-name">Node.js</span></span>
-                            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:72%"></div></div>
-                            <span class="coding-skill-pct">72%</span>
-                        </div>
-                        <div class="coding-skill">
-                            <span class="skill-label"><img class="coding-skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL"><span class="coding-skill-name">SQL</span></span>
-                            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:68%"></div></div>
-                            <span class="coding-skill-pct">68%</span>
+                        <div class="gh-stat-tile">
+                            <span class="gh-stat-value" id="gh-stat-langs">–</span>
+                            <span class="gh-stat-label">Languages</span>
                         </div>
                     </div>
+
+                    <div class="gh-lang-mix">
+                        <div class="gh-lang-bar" id="gh-lang-bar"><div class="gh-lang-bar-skel"></div></div>
+                        <ul class="gh-lang-legend" id="gh-lang-legend">
+                            <li class="gh-legend-skel"></li>
+                            <li class="gh-legend-skel"></li>
+                            <li class="gh-legend-skel"></li>
+                        </ul>
+                    </div>
+
+                    <div class="gh-sync-row">
+                        <span class="gh-sync-note" id="gh-sync-note">กำลังซิงก์ข้อมูลจาก GitHub…</span>
+                        <button type="button" class="gh-refresh-btn" id="gh-refresh-btn" aria-label="ซิงก์ข้อมูลใหม่" title="ซิงก์ใหม่">↻</button>
+                    </div>
                 </div>
-            </div>
             </div>
 
             <!-- Category tags -->
@@ -2553,7 +2591,182 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
                     <span class="lang-card-desc">Technical reading, writing &amp; professional communication</span>
                 </div>
             </div>
+        </div>
     </section>
+
+    <!-- N-GH. Coding Activity — live GitHub stats, no guessed percentages -->
+    <script>
+    (function () {
+        var GH_USER = 'tanakrthum254614-max';
+        var CACHE_KEY = 'ghSkills_' + GH_USER + '_v1';
+        var CACHE_TTL = 60 * 60 * 1000; // 1h
+
+        var elBadge  = document.getElementById('gh-live-badge');
+        var elRepos  = document.getElementById('gh-stat-repos');
+        var elActive = document.getElementById('gh-stat-active');
+        var elLangs  = document.getElementById('gh-stat-langs');
+        var elBar    = document.getElementById('gh-lang-bar');
+        var elLegend = document.getElementById('gh-lang-legend');
+        var elNote   = document.getElementById('gh-sync-note');
+        var elRefresh = document.getElementById('gh-refresh-btn');
+        if (!elBadge || !elRepos) return;
+
+        var LANG_COLORS = {
+            HTML: '#e34c26', CSS: '#563d7c', JavaScript: '#f1e05a', TypeScript: '#3178c6',
+            Python: '#3572A5', PHP: '#4F5D95', Java: '#b07219', 'C++': '#f34b7d', C: '#8a8a8a',
+            'C#': '#178600', Go: '#00ADD8', Ruby: '#701516', Shell: '#89e051', Vue: '#41b883',
+            Dockerfile: '#6cb2eb', Swift: '#F05138', Kotlin: '#A97BFF', Rust: '#dea584', SCSS: '#c6538c'
+        };
+        var FALLBACK = ['#38BDF8', '#7C3AED', '#F59E0B', '#10B981', '#EC4899', '#60A5FA'];
+        function colorFor(name, i) { return LANG_COLORS[name] || FALLBACK[i % FALLBACK.length]; }
+
+        function timeAgoTh(iso) {
+            var diffMs = Date.now() - new Date(iso).getTime();
+            var min = Math.floor(diffMs / 60000);
+            if (min < 1) return 'เมื่อสักครู่';
+            if (min < 60) return min + ' นาทีที่แล้ว';
+            var hr = Math.floor(min / 60);
+            if (hr < 24) return hr + ' ชม.ที่แล้ว';
+            var day = Math.floor(hr / 24);
+            if (day < 30) return day + ' วันที่แล้ว';
+            var mo = Math.floor(day / 30);
+            if (mo < 12) return mo + ' เดือนที่แล้ว';
+            return Math.floor(mo / 12) + ' ปีที่แล้ว';
+        }
+
+        function readCache() {
+            try {
+                var raw = localStorage.getItem(CACHE_KEY);
+                if (!raw) return null;
+                var obj = JSON.parse(raw);
+                if (!obj.syncedAt || Date.now() - obj.syncedAt > CACHE_TTL) return null;
+                return obj;
+            } catch (e) { return null; }
+        }
+        function writeCache(obj) {
+            try { localStorage.setItem(CACHE_KEY, JSON.stringify(obj)); } catch (e) {}
+        }
+
+        function render(data) {
+            elRepos.textContent = data.repoCount;
+            elActive.textContent = data.lastPush ? timeAgoTh(data.lastPush) : '—';
+            elLangs.textContent = data.langCount;
+
+            elBar.innerHTML = '';
+            elLegend.innerHTML = '';
+            data.langs.forEach(function (l, i) {
+                var seg = document.createElement('div');
+                seg.className = 'gh-lang-bar-seg';
+                seg.style.width = l.pct + '%';
+                seg.style.background = colorFor(l.name, i);
+                seg.title = l.name + ' — ' + l.pct + '%';
+                elBar.appendChild(seg);
+
+                var li = document.createElement('li');
+                var dot = document.createElement('span');
+                dot.className = 'gh-legend-dot';
+                dot.style.background = colorFor(l.name, i);
+                var nm = document.createElement('span');
+                nm.className = 'gh-legend-name';
+                nm.textContent = l.name;
+                var pc = document.createElement('span');
+                pc.className = 'gh-legend-pct';
+                pc.textContent = l.pct + '%';
+                li.appendChild(dot);
+                li.appendChild(nm);
+                li.appendChild(pc);
+                elLegend.appendChild(li);
+            });
+
+            elNote.textContent = 'ซิงก์ล่าสุด ' + timeAgoTh(data.syncedAt) + ' · จาก GitHub API สาธารณะ';
+            elNote.classList.remove('is-error');
+            elBadge.classList.remove('is-error');
+            elBadge.innerHTML = '<span class="gh-live-dot"></span>Live · GitHub';
+        }
+
+        function showError() {
+            elNote.textContent = 'ซิงก์กับ GitHub ไม่สำเร็จตอนนี้ — ลองกดซิงก์ใหม่อีกครั้ง';
+            elNote.classList.add('is-error');
+            elBadge.classList.add('is-error');
+            elBadge.innerHTML = '<span class="gh-live-dot"></span>Offline';
+            elRepos.textContent = '—';
+            elActive.textContent = '—';
+            elLangs.textContent = '—';
+            elBar.innerHTML = '';
+            elLegend.innerHTML = '';
+        }
+
+        function fetchLive() {
+            return fetch('https://api.github.com/users/' + GH_USER + '/repos?per_page=100&sort=pushed')
+                .then(function (r) { if (!r.ok) throw new Error('repos ' + r.status); return r.json(); })
+                .then(function (repos) {
+                    var own = repos.filter(function (r) { return !r.fork; });
+                    var lastPush = own.reduce(function (latest, r) {
+                        return (!latest || r.pushed_at > latest) ? r.pushed_at : latest;
+                    }, null);
+
+                    return Promise.all(own.map(function (r) {
+                        return fetch('https://api.github.com/repos/' + GH_USER + '/' + r.name + '/languages')
+                            .then(function (res) { return res.ok ? res.json() : {}; })
+                            .catch(function () { return {}; });
+                    })).then(function (langMaps) {
+                        var totals = {};
+                        langMaps.forEach(function (map) {
+                            Object.keys(map).forEach(function (k) { totals[k] = (totals[k] || 0) + map[k]; });
+                        });
+                        var entries = Object.keys(totals).map(function (k) { return { name: k, bytes: totals[k] }; });
+                        entries.sort(function (a, b) { return b.bytes - a.bytes; });
+                        var totalBytes = entries.reduce(function (s, e) { return s + e.bytes; }, 0) || 1;
+
+                        var TOP_N = 6;
+                        var top = entries.slice(0, TOP_N);
+                        var rest = entries.slice(TOP_N);
+                        var restBytes = rest.reduce(function (s, e) { return s + e.bytes; }, 0);
+
+                        var langs = top.map(function (e) {
+                            return { name: e.name, pct: Math.round((e.bytes / totalBytes) * 1000) / 10 };
+                        });
+                        if (restBytes > 0) {
+                            langs.push({ name: 'Other', pct: Math.round((restBytes / totalBytes) * 1000) / 10 });
+                        }
+
+                        return {
+                            repoCount: own.length,
+                            lastPush: lastPush,
+                            langCount: entries.length,
+                            langs: langs,
+                            syncedAt: Date.now()
+                        };
+                    });
+                });
+        }
+
+        function load(force) {
+            var cached = !force && readCache();
+            if (cached) { render(cached); return; }
+            fetchLive().then(function (data) {
+                writeCache(data);
+                render(data);
+            }).catch(showError);
+        }
+
+        if (elRefresh) {
+            elRefresh.addEventListener('click', function () {
+                elRefresh.classList.add('is-spinning');
+                elNote.textContent = 'กำลังซิงก์ข้อมูลจาก GitHub…';
+                elNote.classList.remove('is-error');
+                fetchLive().then(function (data) {
+                    writeCache(data);
+                    render(data);
+                }).catch(showError).finally(function () {
+                    setTimeout(function () { elRefresh.classList.remove('is-spinning'); }, 700);
+                });
+            });
+        }
+
+        load(false);
+    })();
+    </script>
 
     <!-- ══ I. WORKS & HOBBIES ══ -->
     <section id="activities" class="activities-section" data-page="activities">
@@ -3734,7 +3947,7 @@ document.querySelectorAll('.timeline-item, .experience-item, .activity-item, .ho
     var START = new Date('2025-05-01');
     var d = new Date();
     var months = Math.max(0, (d.getFullYear()-START.getFullYear())*12 + (d.getMonth()-START.getMonth()));
-    var skills = document.querySelectorAll('.coding-skill').length || 8;
+    var skills = document.querySelectorAll('.tool-box').length || 6;
 
     var STATS = [
         ['stat-months',   months],
